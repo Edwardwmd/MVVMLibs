@@ -1,21 +1,13 @@
 package com.edw.mvvmlibs.base
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.annotation.LayoutRes
 
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBinderMapperImpl
-import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModel
-import androidx.viewbinding.ViewBinding
-import com.edw.mvvmlibs.databinding.ActivityBaseBinding
-import java.lang.Exception
-import java.lang.reflect.ParameterizedType
-import kotlin.reflect.KProperty
+import com.edw.mvvmlibs.utils.StatusBarUtils
 
 
 /**
@@ -32,6 +24,8 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //实现沉浸式状态栏
+        StatusBarUtils.fixSystemBar(this)
         //初始化Databinding
         binding = DataBindingUtil.setContentView(this, getLayoutRes())
 

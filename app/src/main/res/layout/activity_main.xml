@@ -7,7 +7,7 @@
 
         <variable
             name="MartialArts"
-            type="com.edw.mvvmlibs.MartialArts" />
+            type="com.edw.mvvmlibs.bean.MartialArts" />
 
 
     </data>
