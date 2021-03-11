@@ -2,7 +2,6 @@ package com.edw.mvvmlibs.base
 
 import android.os.Bundle
 import android.view.View
-import androidx.databinding.Observable
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -14,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
  * Website: https://github.com/Edwardwmd
  * Desc: 使用ViewModel实现MVVM的Fragment的基类
  */
-abstract class BaseVmFragment<T : ViewDataBinding, VM : ViewModel> : BaseFragment<T>() {
+abstract class BaseVmFragment<T:ViewDataBinding, VM : ViewModel> : BaseFragment<T>() {
 
     protected lateinit var vm: VM
 

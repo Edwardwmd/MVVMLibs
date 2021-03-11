@@ -5,6 +5,13 @@ buildscript {
     ext.paging_version = "2.1.2"
     ext.fragment_version = "1.3.0"
     ext.koin_version = "2.2.2"
+    ext.retrofit_version = "2.9.0"
+    ext.okhttp_version = "4.9.1"
+    ext.rxjava_version = "3.0.0"
+    ext.nav_version = "2.3.3"
+    ext.room_version = "2.2.6"
+    ext.glide_version = "4.12.0"
+    ext.arouter_version = "1.5.1"
 
     repositories {
         google()

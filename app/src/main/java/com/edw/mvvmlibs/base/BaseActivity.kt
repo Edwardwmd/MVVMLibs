@@ -28,13 +28,18 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         StatusBarUtils.fixSystemBar(this)
         //初始化Databinding
         binding = DataBindingUtil.setContentView(this, getLayoutRes())
+        //如果不继承BaseVMActivity可重写此方法
+        initView()
 
+        initData()
     }
+
+    open fun initData() {}
+
+    open fun initView() {}
 
     @LayoutRes
     abstract fun getLayoutRes(): Int
-
-
 
 
 }

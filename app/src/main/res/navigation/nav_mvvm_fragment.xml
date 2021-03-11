@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_kaiyan_home"
+    app:startDestination="@id/btn_home_fr">
+<!--    id要保持与Menu中的Id一致-->
+    <fragment
+        android:id="@+id/btn_home_fr"
+        android:name="com.edw.mvvmlibs.ui.fragment.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/btn_follow_fr"
+        android:name="com.edw.mvvmlibs.ui.fragment.FollowFragment"
+        android:label="FollowFragment" />
+    <fragment
+        android:id="@+id/btn_notification_fr"
+        android:name="com.edw.mvvmlibs.ui.fragment.NotificationFragment"
+        android:label="NotificationFragment" />
+    <fragment
+        android:id="@+id/btn_mine_fr"
+        android:name="com.edw.mvvmlibs.ui.fragment.MineFragment"
+        android:label="MineFragment" />
+</navigation>

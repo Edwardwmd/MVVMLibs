@@ -22,6 +22,7 @@ object StatusBarUtils {
     /**
      * 1.沉浸式状态栏SDK_INT>23 Android M
      */
+    @Suppress("DEPRECATION")
     fun fixSystemBar(mActivity: Activity) {
         if (SDK_INT < Build.VERSION_CODES.M) return
         //获取手机整个屏幕视窗
@@ -31,7 +32,7 @@ object StatusBarUtils {
         if (SDK_INT >= Build.VERSION_CODES.R) {//大于Android 11 (30)
             val controller = mActivity.window.insetsController
             controller?.apply {
-                hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
+                hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars() or WindowInsets.Type.systemBars())
                 systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE //当下拉页面会显示状态栏
             }
         } else {//大于或等于Android 6 (23) 且小于Android 11 (30)

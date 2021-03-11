@@ -1,4 +1,4 @@
-package com.edw.mvvmlibs
+package com.edw.mvvmlibs.viewmodel
 
 import androidx.lifecycle.ViewModel
 

@@ -1,5 +1,6 @@
 package com.edw.mvvmlibs
 
+import com.alibaba.android.arouter.launcher.ARouter
 import com.edw.mvvmlibs.base.BaseApp
 import com.edw.mvvmlibs.di.appModules
 import org.koin.android.ext.koin.androidContext
@@ -17,6 +18,7 @@ class App : BaseApp() {
 
     override fun onCreate() {
         super.onCreate()
+        ARouter.init(this)
         //Kotlin依赖注入
 //        initKoin()
     }
