@@ -1,4 +1,4 @@
-package com.edw.mvvmlibs.api
+package com.edw.mvvmlibs.net.api
 
 /**
  * Author: EdwardWMD
@@ -9,7 +9,7 @@ package com.edw.mvvmlibs.api
  */
 object Api {
     const val BASE_URL = "http://baobab.kaiyanapp.com/"
-
+    //启动页图片url
     const val LAUNCHER_IMG_URL =
         "https://img-pre.ivsky.com/img/tupian/pre/202005/31/xingkong-006.jpg"
 }

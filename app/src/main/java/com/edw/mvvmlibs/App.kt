@@ -4,6 +4,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.edw.mvvmlibs.base.BaseApp
 import com.edw.mvvmlibs.di.appModules
 import org.koin.android.ext.koin.androidContext
+import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
@@ -15,16 +16,17 @@ import org.koin.core.logger.Level
  * Appliactaion
  */
 class App : BaseApp() {
+    lateinit var startKoin: KoinApplication
 
     override fun onCreate() {
         super.onCreate()
         ARouter.init(this)
         //Kotlin依赖注入
-//        initKoin()
+        initKoin()
     }
 
     private fun initKoin() {
-        startKoin {
+        startKoin = startKoin {
             androidContext(this@App)
             printLogger(level = Level.INFO)
             modules(appModules)
@@ -32,5 +34,8 @@ class App : BaseApp() {
         }
     }
 
-
+    override fun onTerminate() {
+        super.onTerminate()
+        startKoin.close()
+    }
 }

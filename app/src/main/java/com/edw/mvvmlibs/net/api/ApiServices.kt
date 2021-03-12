@@ -1,4 +1,4 @@
-package com.edw.mvvmlibs.api
+package com.edw.mvvmlibs.net.api
 
 import com.edw.mvvmlibs.bean.KaiYanBean
 import io.reactivex.rxjava3.core.Observable

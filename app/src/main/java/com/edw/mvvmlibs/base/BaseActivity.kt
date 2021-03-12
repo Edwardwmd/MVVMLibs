@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.edw.mvvmlibs.utils.StatusBarUtils
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.disposables.Disposable
+import org.koin.android.ext.android.inject
 
 
 /**
@@ -20,6 +23,9 @@ import com.edw.mvvmlibs.utils.StatusBarUtils
 
 @Suppress("UNCHECKED_CAST")
 abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
+
+    private val disposable: CompositeDisposable by inject()
+
     protected lateinit var binding: T
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,9 +44,19 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     open fun initView() {}
 
+    open fun addDisposed(disposable: Disposable) {
+        this.disposable.add(disposable)
+    }
+
     @LayoutRes
     abstract fun getLayoutRes(): Int
 
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (!disposable.isDisposed)
+            disposable.dispose()
+    }
 
 }
 

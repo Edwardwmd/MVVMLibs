@@ -1,5 +1,8 @@
 package com.edw.mvvmlibs.di
 
+import com.edw.mvvmlibs.base.BaseActivity
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 /**
@@ -20,6 +23,12 @@ private val retrofitModule = module {
 
 }
 
+private val rxJavaModule = module {
+    factory {
+        CompositeDisposable()
+    }
 
-val appModules = listOf(roomModule, retrofitModule)
+}
+
+val appModules = listOf(rxJavaModule)
 
