@@ -1,5 +1,7 @@
 package com.edw.mvvmlibs.bean
 
+import android.content.ClipData
+
 /**
  * Author: EdwardWMD
  * Data: 2021/3/11
@@ -7,17 +9,11 @@ package com.edw.mvvmlibs.bean
  * Website: https://github.com/Edwardwmd
  * Desc: File Information!
  */
-data class KaiYanBean(
-    val adExist: Boolean,
-    val count: Int,
-    val itemList: List<Item>,
-    val nextPageUrl: Any,
-    val total: Int
-)
 
-data class Item(
+
+data class HomeBaseItem(
     val adIndex: Int,
-    val mData: Data,
+    val `data`: Data,
     val id: Int,
     val tag: Any,
     val trackingData: Any,
@@ -57,15 +53,15 @@ data class Data(
     val ifLimitVideo: Boolean,
     val ifPgc: Boolean,
     val ifShowNotificationIcon: Boolean,
-    val itemList: List<ItemX>,
+    val itemList: MutableList<ItemX>,
     val label: Any,
-    val labelList: List<Any>,
+    val labelList: MutableList<Any>,
     val lastViewTime: Any,
     val library: String,
     val merge: Boolean,
     val mergeNickName: Any,
     val mergeSubTitle: Any,
-    val playInfo: List<PlayInfoXX>,
+    val playInfo: MutableList<PlayInfoXX>,
     val playUrl: String,
     val played: Boolean,
     val playlists: Any,
@@ -84,8 +80,8 @@ data class Data(
     val slogan: Any,
     val src: Any,
     val subTitle: Any,
-    val subtitles: List<Any>,
-    val tags: List<TagXX>,
+    val subtitles: MutableList<Any>,
+    val tags: MutableList<TagXX>,
     val text: String,
     val thumbPlayUrl: Any,
     val title: String,
@@ -125,7 +121,7 @@ data class Consumption(
 
 data class Content(
     val adIndex: Int,
-    val mData: DataX,
+    val `data`: DataX,
     val id: Int,
     val tag: Any,
     val trackingData: Any,
@@ -167,7 +163,7 @@ data class Header(
 
 data class ItemX(
     val adIndex: Int,
-    val mData: DataXX,
+    val `data`: DataXX,
     val id: Int,
     val tag: Any,
     val trackingData: Any,
@@ -229,7 +225,7 @@ data class TagXX(
     val childTagIdList: Any,
     val childTagList: Any,
     val communityIndex: Int,
-    val desc: String,
+    val desc: Any,
     val haveReward: Boolean,
     val headerImage: String,
     val id: Int,
@@ -243,23 +239,23 @@ data class UserX(
     val actionUrl: String,
     val area: Any,
     val avatar: String,
-    val birthday: Long,
-    val city: String,
-    val country: String,
+    val birthday: Any,
+    val city: Any,
+    val country: Any,
     val cover: Any,
-    val description: String,
+    val description: Any,
     val expert: Boolean,
     val followed: Boolean,
-    val gender: String,
+    val gender: Any,
     val ifPgc: Boolean,
-    val job: String,
+    val job: Any,
     val library: String,
     val limitVideoOpen: Boolean,
     val nickname: String,
     val registDate: Long,
     val releaseDate: Long,
     val uid: Int,
-    val university: String,
+    val university: Any,
     val userType: String
 )
 
@@ -320,7 +316,7 @@ data class DataX(
     val recallSource: Any,
     val recall_source: Any,
     val releaseTime: Long,
-    val remark: String,
+    val remark: Any,
     val resourceType: String,
     val searchWeight: Int,
     val shareAdTrack: Any,
@@ -570,7 +566,7 @@ data class TagX(
     val childTagIdList: Any,
     val childTagList: Any,
     val communityIndex: Int,
-    val desc: Any,
+    val desc: String,
     val haveReward: Boolean,
     val headerImage: String,
     val id: Int,
@@ -619,23 +615,23 @@ data class User(
     val actionUrl: String,
     val area: Any,
     val avatar: String,
-    val birthday: Long,
-    val city: String,
-    val country: String,
+    val birthday: Any,
+    val city: Any,
+    val country: Any,
     val cover: Any,
-    val description: String,
+    val description: Any,
     val expert: Boolean,
     val followed: Boolean,
-    val gender: String,
+    val gender: Any,
     val ifPgc: Boolean,
-    val job: String,
+    val job: Any,
     val library: String,
     val limitVideoOpen: Boolean,
     val nickname: String,
     val registDate: Long,
     val releaseDate: Long,
     val uid: Int,
-    val university: String,
+    val university: Any,
     val userType: String
 )
 

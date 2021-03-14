@@ -47,7 +47,6 @@ android {
     }
 
     buildFeatures {
-        viewBinding true
         dataBinding true
     }
 }
@@ -83,13 +82,14 @@ dependencies {
 
 
     //Koin依赖注入框架
-    api "org.koin:koin-core:$koin_version"
-    api "org.koin:koin-android:$koin_version"
+    api "org.koin:koin-androidx-scope:$koin_version"
+    api "org.koin:koin-androidx-viewmodel:$koin_version"
+    api "org.koin:koin-androidx-fragment:$koin_version"
+    api "org.koin:koin-androidx-ext:$koin_version"
     testImplementation "org.koin:koin-test:$koin_version"
 
     //Retrofit
     api "com.squareup.retrofit2:retrofit:$retrofit_version"
-    api "com.squareup.retrofit2:adapter-rxjava3:$retrofit_version"
     api "com.squareup.retrofit2:converter-gson:$retrofit_version"
     api "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
@@ -105,6 +105,9 @@ dependencies {
     //ARouter
     api "com.alibaba:arouter-api:$arouter_version"
     kapt "com.alibaba:arouter-compiler:$arouter_version"
+
+    //
+    api "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
 
 }

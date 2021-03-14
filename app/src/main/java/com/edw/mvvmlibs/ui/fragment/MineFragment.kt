@@ -7,11 +7,13 @@ import com.edw.mvvmlibs.viewmodel.MineViewModel
 
 
 class MineFragment : BaseVmFragment<FragmentMineBinding, MineViewModel>() {
-    override fun getViewModelClazz(): Class<MineViewModel> {
-        return MineViewModel::class.java
-    }
+
 
     override fun getLayoutRes(): Int {
        return R.layout.fragment_mine
+    }
+
+    override fun getViewModelClazz(): Class<MineViewModel> {
+        return MineViewModel::class.java
     }
 }

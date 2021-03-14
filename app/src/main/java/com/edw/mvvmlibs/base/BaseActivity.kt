@@ -56,6 +56,8 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         super.onDestroy()
         if (!disposable.isDisposed)
             disposable.dispose()
+
+        binding.unbind()
     }
 
 }

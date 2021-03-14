@@ -9,6 +9,4 @@ import androidx.lifecycle.ViewModel
  * Website: https://github.com/Edwardwmd
  * Desc: File Information!
  */
-class MainViewModel : ViewModel() {
-
-}
+class MainViewModel : ViewModel()

@@ -8,14 +8,12 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.edw.mvvmlibs.R
 import com.edw.mvvmlibs.net.api.Api
 import com.edw.mvvmlibs.base.BaseActivity
-import com.edw.mvvmlibs.base.BaseVMActivity
-import com.edw.mvvmlibs.base.BaseVmFragment
+
 import com.edw.mvvmlibs.databinding.ActivityLauncherBinding
 import com.edw.mvvmlibs.utils.Constant
 import com.edw.mvvmlibs.utils.FontsUtils
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
-import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
@@ -43,9 +41,9 @@ class LauncherActivity : BaseActivity<ActivityLauncherBinding>() {
         binding.tvLauncherTipsBottom.typeface =
             FontsUtils.setTextStyle(FontsUtils.Type.FZLANTINGHEI_L)
         //跳转主页面
-
+        //从0开始发射5个数字为：0-4依次输出，延时0s执行，每1s发射一次。
         addDisposed(Flowable
-            .intervalRange(0, 3, 0, 1, TimeUnit.SECONDS)
+            .intervalRange(0, 5, 0, 1, TimeUnit.SECONDS)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext {

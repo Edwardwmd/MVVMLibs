@@ -1,12 +1,13 @@
 package com.edw.mvvmlibs.net.client
 
 import com.edw.mvvmlibs.net.api.Api
+import com.edw.mvvmlibs.net.api.ApiServices
+import com.google.gson.Gson
 import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+
 import java.util.concurrent.TimeUnit
 
 /**
@@ -30,21 +31,19 @@ class RetrofitClient constructor() {
             .Builder()
             .client(initOkhttp())
             .baseUrl(Api.BASE_URL)
-            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(LenientGsonConverterFactory.create(Gson()))
             .build()
     }
 
     private fun initOkhttp(): OkHttpClient {
         return OkHttpClient()
             .newBuilder()
-            .addInterceptor(CommonInterceptor())
             .addInterceptor(initIntercepter())
-            .addInterceptor(LogInterceptor())
-            .connectionPool(ConnectionPool())
+            .addInterceptor(CommonInterceptor())
             .readTimeout(15, TimeUnit.SECONDS)
             .connectTimeout(15, TimeUnit.SECONDS)
             .callTimeout(15, TimeUnit.SECONDS)
+            .connectionPool(ConnectionPool(20,1,TimeUnit.SECONDS))
             .build()
 
     }
@@ -54,8 +53,8 @@ class RetrofitClient constructor() {
     }
 
     //创建apiServices类
-    fun <T> create(apiServices: Class<T>): Class<T> {
-        return retrofit!!.create(apiServices::class.java)
+    fun <T> create(apiService: Class<T>): T {
+        return retrofit!!.create(apiService)
     }
 
 }

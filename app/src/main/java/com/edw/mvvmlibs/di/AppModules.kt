@@ -1,8 +1,8 @@
 package com.edw.mvvmlibs.di
 
-import com.edw.mvvmlibs.base.BaseActivity
+
+import com.edw.mvvmlibs.net.client.RetrofitClient
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 /**
@@ -20,15 +20,16 @@ private val roomModule = module {
 
 //retrofitDepository网络仓库的依赖注入
 private val retrofitModule = module {
-
+    RetrofitClient.instance
 }
 
-private val rxJavaModule = module {
+private val baseModule = module {
     factory {
         CompositeDisposable()
     }
-
 }
 
-val appModules = listOf(rxJavaModule)
+
+val appModules = listOf(
+    baseModule)
 

@@ -3,10 +3,15 @@ package com.edw.mvvmlibs
 import com.alibaba.android.arouter.launcher.ARouter
 import com.edw.mvvmlibs.base.BaseApp
 import com.edw.mvvmlibs.di.appModules
+
+import com.edw.mvvmlibs.viewmodel.*
+
 import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
+import org.koin.dsl.module
 
 /**
  * Author: EdwardWMD
@@ -16,7 +21,8 @@ import org.koin.core.logger.Level
  * Appliactaion
  */
 class App : BaseApp() {
-    lateinit var startKoin: KoinApplication
+
+    lateinit var mKoin: KoinApplication
 
     override fun onCreate() {
         super.onCreate()
@@ -26,16 +32,15 @@ class App : BaseApp() {
     }
 
     private fun initKoin() {
-        startKoin = startKoin {
+        mKoin = startKoin {
             androidContext(this@App)
-            printLogger(level = Level.INFO)
+            androidLogger(level = Level.INFO)
             modules(appModules)
-
         }
     }
 
     override fun onTerminate() {
         super.onTerminate()
-        startKoin.close()
+        mKoin.close()
     }
 }

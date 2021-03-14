@@ -31,4 +31,10 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     @LayoutRes
     abstract fun getLayoutRes(): Int
 
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.unbind()
+    }
+
 }
