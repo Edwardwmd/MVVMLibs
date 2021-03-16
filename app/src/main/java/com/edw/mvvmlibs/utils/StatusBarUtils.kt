@@ -33,7 +33,7 @@ object StatusBarUtils {
             val controller = mActivity.window.insetsController
             controller?.apply {
                 hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars() or WindowInsets.Type.systemBars())
-                systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE //当下拉页面会显示状态栏
+                systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE //当下拉或上拉页面会显示状态栏
             }
         } else {//大于或等于Android 6 (23) 且小于Android 11 (30)
             decorView.systemUiVisibility = (

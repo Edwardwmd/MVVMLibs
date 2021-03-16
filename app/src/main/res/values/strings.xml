@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">MVVMLibs</string>
- 
+
 
     <string name="navigation_bottom_view_home">首页</string>
     <string name="navigation_bottom_view_follow">关注</string>
@@ -8,4 +8,5 @@
     <string name="navigation_bottom_view_mine">我的</string>
     <string name="launcher_img_desc_text">启动页面精选图片</string>
     <string name="launcher_img_logo_desc_text">启动页面logo</string>
+    <string name="logo_text_name">eyepetizeer</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.edw.mvvmlibs.net.api
+package com.edw.mvvmlibs.net.client
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,8 +7,8 @@ import android.net.NetworkCapabilities
 import android.net.NetworkInfo
 import android.net.wifi.WifiManager
 import android.os.Build
+import android.os.StatFs
 import android.telephony.TelephonyManager
-import com.edw.mvvmlibs.base.BaseActivity
 import com.edw.mvvmlibs.base.BaseApp
 
 /**
@@ -52,6 +52,25 @@ object NetworkStatusManager {
             return if (WIFI_CONNECTED) return CONNECTIVITY_MANAGER.activeNetworkInfo!!.type else null
         }
 
+    val NETWORK_CONNECTED: Boolean
+        get() {
+            if (Build.VERSION.SDK_INT >= 23) {
+                //获取网络属性
+                val networkCapabilities =
+                    CONNECTIVITY_MANAGER.getNetworkCapabilities(CONNECTIVITY_MANAGER.activeNetwork)
+                networkCapabilities?.apply {
+                    return hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)||hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                }
+            } else {
+                val activeNetworkInfo = CONNECTIVITY_MANAGER.activeNetworkInfo
+                activeNetworkInfo?.apply {
+                    return isConnectedOrConnecting && activeNetworkInfo.state == NetworkInfo.State.CONNECTED
+                }
+
+            }
+            return false
+        }
+
     //当前WIFI是否可用
     val WIFI_CONNECTED: Boolean
         get() {
@@ -66,7 +85,7 @@ object NetworkStatusManager {
             } else {
                 val activeNetworkInfo = CONNECTIVITY_MANAGER.activeNetworkInfo
                 activeNetworkInfo?.apply {
-                    return isConnected && type == ConnectivityManager.TYPE_WIFI
+                    return isConnectedOrConnecting && type == ConnectivityManager.TYPE_WIFI
                 }
             }
             return false
@@ -139,7 +158,7 @@ object NetworkStatusManager {
                     NetworkType.CELLULAR_5G
                 }
 
-                TelephonyManager.DATA_DISCONNECTED->{
+                TelephonyManager.DATA_DISCONNECTED -> {
                     NetworkType.DISCONNECTION
                 }
 

@@ -2,15 +2,27 @@
     <!-- Base application theme. -->
     <style name="Theme.MVVMLibs" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/teal_200</item>
+        <item name="colorPrimaryVariant">@color/teal_200</item>
+        <item name="colorOnPrimary">@color/teal_200</item>
     </style>
+
+    <!--    转场动画-->
+    <style name="activityAnimation" parent="@android:style/Animation.Translucent">
+        <item name="android:activityOpenEnterAnimation">@anim/enter_anim</item>
+        <item name="android:activityOpenExitAnimation">@anim/exit_anim</item>
+        <item name="android:activityCloseEnterAnimation">@anim/close_enter_anim</item>
+        <item name="android:activityCloseExitAnimation">@anim/close_exit_anim</item>
+    </style>
+
+    <!--App冷启动处理-->
+    <style name="Theme.Launcher" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@drawable/ic_launcher_fast_bg</item>
+
+    </style>
+
 </resources>

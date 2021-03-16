@@ -4,19 +4,19 @@
     android:id="@+id/nav_kaiyan_home"
     app:startDestination="@id/btn_home_fr">
 <!--    id要保持与Menu中的Id一致-->
-    <fragment
+    <fixFragment
         android:id="@+id/btn_home_fr"
         android:name="com.edw.mvvmlibs.ui.fragment.HomeFragment"
         android:label="HomeFragment" />
-    <fragment
+    <fixFragment
         android:id="@+id/btn_follow_fr"
         android:name="com.edw.mvvmlibs.ui.fragment.FollowFragment"
         android:label="FollowFragment" />
-    <fragment
+    <fixFragment
         android:id="@+id/btn_notification_fr"
         android:name="com.edw.mvvmlibs.ui.fragment.NotificationFragment"
         android:label="NotificationFragment" />
-    <fragment
+    <fixFragment
         android:id="@+id/btn_mine_fr"
         android:name="com.edw.mvvmlibs.ui.fragment.MineFragment"
         android:label="MineFragment" />

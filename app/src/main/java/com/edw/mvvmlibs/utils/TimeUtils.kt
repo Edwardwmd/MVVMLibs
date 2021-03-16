@@ -2,11 +2,14 @@ package com.edw.mvvmlibs.utils
 
 /**
  * Author: EdwardWMD
- * Data: 2021/3/14
+ * Data: 2021/3/16
  * Project: MVVMLibs
  * Website: https://github.com/Edwardwmd
  * Desc: File Information!
  */
-enum class LoadState {
-    LOADING,SUCCESS,ERROR,NONE,EMPTY,NETWORKDISCONNECTED
+object TimeUtils {
+
+    fun currentTimes(): Long {
+        return System.currentTimeMillis()
+    }
 }
