@@ -26,17 +26,24 @@ object FontsUtils {
                 "fonts/FZLanTingHeiS-L-GB-Regular.TTF"
             )
 
-            Type.BSTER -> typeface = Typeface.createFromAsset(
+            Type.LOBSTER -> typeface = Typeface.createFromAsset(
                 BaseApp.appContext().assets,
                 "fonts/Lobster-1.4.otf"
             )
-
+            Type.BRIGHTONS -> typeface = Typeface.createFromAsset(
+                BaseApp.appContext().assets,
+                "fonts/Brightons-2.otf"
+            )
+            Type.REFLISATTA -> typeface = Typeface.createFromAsset(
+                BaseApp.appContext().assets,
+                "fonts/Reflisatta-2.ttf"
+            )
         }
         return typeface!!
     }
 
     enum class Type {
-        FZLANTINGHEI_DB, FZLANTINGHEI_L, BSTER
+        FZLANTINGHEI_DB, FZLANTINGHEI_L, LOBSTER, BRIGHTONS,REFLISATTA
     }
 
 }

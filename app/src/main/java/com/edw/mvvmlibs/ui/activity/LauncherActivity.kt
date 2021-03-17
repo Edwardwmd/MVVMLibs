@@ -27,6 +27,7 @@ class LauncherActivity : BaseActivity<ActivityLauncherBinding>() {
     }
 
     override fun initView() {
+
         //设置字体
         binding.tvLauncherTipsTop.typeface =
             FontsUtils.setTextStyle(FontsUtils.Type.FZLANTINGHEI_L)

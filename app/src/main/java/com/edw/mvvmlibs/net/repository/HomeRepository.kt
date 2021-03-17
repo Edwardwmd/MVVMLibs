@@ -2,6 +2,7 @@ package com.edw.mvvmlibs.net.repository
 
 import android.os.Looper
 import android.util.Log
+import com.edw.mvvmlibs.bean.Categories
 import com.edw.mvvmlibs.bean.HomeBaseItem
 import com.edw.mvvmlibs.bean.ResultData
 import com.edw.mvvmlibs.net.api.ApiServices
@@ -15,7 +16,7 @@ import com.edw.mvvmlibs.utils.ThreadUtils
  * Website: https://github.com/Edwardwmd
  * Desc: File Information!
  */
-object HomeRepository {
+class HomeRepository constructor(private val retrofit:RetrofitClient) {
 
     //首页-发现
     suspend fun discovery(): ResultData<HomeBaseItem> {
@@ -23,15 +24,20 @@ object HomeRepository {
             "当前线程---->",
             "当前线程ID:${Thread.currentThread().id} 当前线程是否为主线程: ${ThreadUtils.isMainThread()}"
         )
-        return RetrofitClient.instance.create(ApiServices::class.java).discovery()
+        return retrofit.create(ApiServices::class.java).discovery()
     }
     //首页-推荐
     suspend fun allRec(page: Int): ResultData<HomeBaseItem> {
-        return RetrofitClient.instance.create(ApiServices::class.java).allRec(page)
+        return retrofit.create(ApiServices::class.java).allRec(page)
     }
+
     //首页日报
     suspend fun feed(date: Long, num: Int): ResultData<HomeBaseItem> {
-        return RetrofitClient.instance.create(ApiServices::class.java).feed(date, num)
+        return retrofit.create(ApiServices::class.java).feed(date, num)
+    }
+
+    suspend fun categories():MutableList<Categories>{
+        return RetrofitClient.instance.create(ApiServices::class.java).categories()
     }
 
 }

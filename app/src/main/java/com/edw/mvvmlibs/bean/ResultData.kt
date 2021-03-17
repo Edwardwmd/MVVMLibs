@@ -12,6 +12,6 @@ data class ResultData<T>(
     val adExist: Boolean,
     val count: Int,
     val itemList: MutableList<T>,
-    val nextPageUrl: Any,
+    val nextPageUrl: String?=null,
     val total: Int
 )

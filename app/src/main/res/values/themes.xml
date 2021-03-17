@@ -1,27 +1,32 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MVVMLibs" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="Theme.MVVMLibs" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/teal_200</item>
         <item name="colorPrimaryVariant">@color/teal_700</item>
         <item name="colorOnPrimary">@color/teal_700</item>
+        <item name="android:windowAnimationStyle">@style/AnimationActivity</item>
     </style>
 
-    <!--    转场动画-->
-    <style name="activityAnimation" parent="@android:style/Animation.Translucent">
-        <item name="android:activityOpenEnterAnimation">@anim/enter_anim</item>
-        <item name="android:activityOpenExitAnimation">@anim/exit_anim</item>
-        <item name="android:activityCloseEnterAnimation">@anim/close_enter_anim</item>
-        <item name="android:activityCloseExitAnimation">@anim/close_exit_anim</item>
+    <!--Activity动画-->
+    <style name="AnimationActivity" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
 
     <!--App冷启动处理-->
-    <style name="Theme.Launcher" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="windowNoTitle">true</item>
+    <style name="LauncherActTheme" parent="Theme.MVVMLibs">
+        <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowBackground">@drawable/ic_launcher_fast_bg</item>
+        <item name="android:windowBackground">@drawable/launcher_start</item>
+<!--        <item name="android:windowFullscreen">true</item>-->
+<!--        <item name="windowNoTitle">true</item>-->
+<!--        <item name="windowActionBar">false</item>-->
+<!--        <item name="windowActionBarOverlay">true</item>-->
+<!--        <item name="windowActionModeOverlay">true</item>-->
+
     </style>
 
 </resources>

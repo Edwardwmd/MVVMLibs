@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.edw.mvvmlibs.net.client
 
 import android.annotation.SuppressLint
@@ -5,9 +7,10 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.NetworkInfo
+
 import android.net.wifi.WifiManager
 import android.os.Build
-import android.os.StatFs
+
 import android.telephony.TelephonyManager
 import com.edw.mvvmlibs.base.BaseApp
 

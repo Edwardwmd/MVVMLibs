@@ -4,6 +4,7 @@ package com.edw.mvvmlibs.base
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import org.koin.androidx.viewmodel.ext.android.getViewModel
-import kotlin.reflect.KClass
+import org.koin.androidx.viewmodel.compat.ViewModelCompat.getViewModel
 
 
 /**
@@ -35,6 +34,7 @@ abstract class BaseVmFragment<T : ViewDataBinding, VM : ViewModel> : Fragment() 
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.e("被创建---->","!!!!!!")
         binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
         return binding.root
     }
@@ -48,14 +48,18 @@ abstract class BaseVmFragment<T : ViewDataBinding, VM : ViewModel> : Fragment() 
         super.onViewCreated(view, savedInstanceState)
         //创建ViewModel
         initViewModel()
-        //观察数据变化,更新数据
-        observeData()
-        //加载数据
+        //加载数据(viewmodel有数据操作调用此方法)
         startLoadData()
+        //观察数据变化,更新数据(viewmodel有数据操作调用此方法)
+        observeData()
+        //初始化数据(viewmode中无操作时可调用此方法)
+        initData()
         //设置事件
         initEvent()
 
     }
+
+    open fun initData() {}
 
     open fun startLoadData(){}
 
@@ -65,7 +69,8 @@ abstract class BaseVmFragment<T : ViewDataBinding, VM : ViewModel> : Fragment() 
 
     @SuppressLint("NewApi")
     private fun initViewModel() {
-        vm = ViewModelProvider(this).get(getViewModelClazz())
+        //使用Koin依赖注入获取ViewModel
+        vm=getViewModel(this,getViewModelClazz())
     }
 
     abstract fun getViewModelClazz(): Class<VM>

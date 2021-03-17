@@ -12,15 +12,17 @@ import androidx.recyclerview.widget.RecyclerView
  */
 abstract class BaseRecyAdapter<T, VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH>() {
     //数据集合
-    private var datas: MutableList<T> = ArrayList()
+    protected var datas: MutableList<T> = ArrayList()
+
     //条目点击事件
     private var onItemClickListener: OnItemClickListener<T, VH>? = null
 
     /**
      * 添加数据
      */
-    fun setDatas(datas: MutableList<T>?) {
-        this.datas = datas!!
+    fun setAllDatas(datas: MutableList<T>?) {
+        if (datas == null) return
+        this.datas.addAll(datas)
         notifyDataSetChanged()
     }
 
@@ -37,7 +39,7 @@ abstract class BaseRecyAdapter<T, VH : RecyclerView.ViewHolder> : RecyclerView.A
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.itemView.setOnClickListener {
             if (onItemClickListener != null) {
-                onItemClickListener!!.onItemClick(holder,datas[position], position)
+                onItemClickListener!!.onItemClick(holder, datas[position], position)
             }
         }
     }
@@ -46,8 +48,8 @@ abstract class BaseRecyAdapter<T, VH : RecyclerView.ViewHolder> : RecyclerView.A
         return if (datas.size <= 0) 0 else datas.size
     }
 
-    interface OnItemClickListener<in T,in VH> {
-        fun onItemClick(holder:VH,item: T, position: Int)
+    interface OnItemClickListener<in T, in VH> {
+        fun onItemClick(holder: VH, item: T, position: Int)
     }
 
 

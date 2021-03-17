@@ -16,9 +16,9 @@ import org.koin.dsl.module
 /**
  * Author: EdwardWMD
  * Data: 2021/3/9
- * Project: MVVMLibs
+ * Project: MaVVMLibs
  * Website: https://github.com/Edwardwmd
- * Appliactaion
+ * Application
  */
 class App : BaseApp() {
 
@@ -26,6 +26,7 @@ class App : BaseApp() {
 
     override fun onCreate() {
         super.onCreate()
+        //ARouter路由
         ARouter.init(this)
         //Kotlin依赖注入
         initKoin()

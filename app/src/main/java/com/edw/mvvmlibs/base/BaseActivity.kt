@@ -31,7 +31,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //实现沉浸式状态栏
-        StatusBarUtils.fixSystemBar(this)
+//        StatusBarUtils.fixSystemBar(this)
         //初始化Databinding
         binding = DataBindingUtil.setContentView(this, getLayoutRes())
         //如果不继承BaseVMActivity可重写此方法

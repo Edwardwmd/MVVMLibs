@@ -2,16 +2,17 @@ package com.edw.mvvmlibs.base
 
 
 import android.os.Bundle
+import androidx.annotation.LayoutRes
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+
 
 import com.edw.mvvmlibs.utils.StatusBarUtils
-
+import org.koin.androidx.viewmodel.compat.ViewModelCompat.getViewModel
 
 
 /**
@@ -27,21 +28,27 @@ abstract class BaseVMActivity<T : ViewDataBinding, VM : ViewModel> : AppCompatAc
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //沉浸式app页面(全屏窗口)
         StatusBarUtils.fixSystemBar(this)
         //初始化DataBinding
-        binding = DataBindingUtil.setContentView<T>(this, getLayoutRes())
+        binding = DataBindingUtil.setContentView(this, getLayoutRes())
         //初始化ViewModel
         initViewModel()
         //观察数据变化,更新数据到UI
         observeData()
+        initData()
         //初始化事件
         initEvent()
     }
 
+    open fun initData() {}
+
+    @LayoutRes
     abstract fun getLayoutRes(): Int
 
     private fun initViewModel() {
-        vm = ViewModelProvider(this).get(getViewModelClass())
+        //使用Koin依赖注入获取ViewModel
+        vm=getViewModel(this,getViewModelClass())
     }
 
     abstract fun getViewModelClass(): Class<VM>

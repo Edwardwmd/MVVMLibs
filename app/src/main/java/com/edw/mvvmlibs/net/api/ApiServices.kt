@@ -1,5 +1,6 @@
 package com.edw.mvvmlibs.net.api
 
+import com.edw.mvvmlibs.bean.Categories
 import com.edw.mvvmlibs.bean.HomeBaseItem
 import com.edw.mvvmlibs.bean.ResultData
 import io.reactivex.rxjava3.core.Observable
@@ -16,18 +17,22 @@ import retrofit2.http.Query
 interface ApiServices {
     //首页-发现
     @GET("api/v5/index/tab/discovery")
-   suspend fun discovery(): ResultData<HomeBaseItem>
+    suspend fun discovery(): ResultData<HomeBaseItem>
+
     //首页-推荐
     @GET("api/v5/index/tab/allRec")
-    suspend fun allRec(@Query("page") page: Int):  ResultData<HomeBaseItem>
+    suspend fun allRec(@Query("page") page: Int): ResultData<HomeBaseItem>
 
     //首页-日报
     /**
      * nextPageUrl : http://baobab.kaiyanapp.com/api/v5/index/tab/feed?date=1516842000000&num=1
      */
     @GET("api/v5/index/tab/feed")
-    suspend fun feed(@Query("date") date: Long, @Query("num") num: Int):  ResultData<HomeBaseItem>
+    suspend fun feed(@Query("date") date: Long, @Query("num") num: Int): ResultData<HomeBaseItem>
 
 
+    //首页-Category
+    @GET("/api/v4/categories")
+   suspend fun categories(): MutableList<Categories>
 
 }

@@ -86,6 +86,7 @@ dependencies {
     api "org.koin:koin-androidx-viewmodel:$koin_version"
     api "org.koin:koin-androidx-fragment:$koin_version"
     api "org.koin:koin-androidx-ext:$koin_version"
+    api "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     testImplementation "org.koin:koin-test:$koin_version"
 
     //Retrofit
@@ -106,8 +107,7 @@ dependencies {
     api "com.alibaba:arouter-api:$arouter_version"
     kapt "com.alibaba:arouter-compiler:$arouter_version"
 
-    //
-    api "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-
+    //RecyclerViewAdapterHelper
+    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:$recycleview_adapter_helper_version"
 
 }

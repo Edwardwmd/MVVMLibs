@@ -14,8 +14,8 @@ import kotlin.properties.Delegates
 
 open class BaseApp : Application() {
     companion object {
-        var mC: Context by Delegates.notNull()
-        fun appContext() = mC.applicationContext
+       private var mC: Context by Delegates.notNull()
+        fun appContext(): Context = mC.applicationContext
     }
 
     override fun onCreate() {

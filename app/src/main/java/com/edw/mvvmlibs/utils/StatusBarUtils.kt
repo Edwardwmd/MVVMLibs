@@ -33,13 +33,17 @@ object StatusBarUtils {
             val controller = mActivity.window.insetsController
             controller?.apply {
                 hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars() or WindowInsets.Type.systemBars())
-                systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE //当下拉或上拉页面会显示状态栏
+                systemBarsBehavior =
+                    WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE //当下拉或上拉页面会显示状态栏
             }
         } else {//大于或等于Android 6 (23) 且小于Android 11 (30)
             decorView.systemUiVisibility = (
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                             or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+                            or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                            or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            or View.SYSTEM_UI_FLAG_IMMERSIVE
+                    )
             //指示此Window负责绘制系统栏背景的标志。如果设置，系统栏将以透明背景绘制
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             //清楚半透明的状态栏，并提供最少的系统提供的背景保护

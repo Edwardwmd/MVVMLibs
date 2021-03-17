@@ -1,19 +1,17 @@
 package com.edw.mvvmlibs.ui.activity
 
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.get
 import androidx.navigation.ui.setupWithNavController
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.edw.mvvmlibs.R
 import com.edw.mvvmlibs.base.BaseVMActivity
 import com.edw.mvvmlibs.databinding.ActivityMainBinding
+import com.edw.mvvmlibs.ui.fragment.FixNavHostFragment
+
 
 import com.edw.mvvmlibs.ui.weight.FixFragmentNavigator
 import com.edw.mvvmlibs.utils.Constant
 import com.edw.mvvmlibs.utils.TimeUtils
-import com.edw.mvvmlibs.utils.ToastUtils
 import com.edw.mvvmlibs.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlin.system.exitProcess
@@ -24,7 +22,7 @@ class MainActivity : BaseVMActivity<ActivityMainBinding, MainViewModel>() {
 
     lateinit var controller: NavController
 
-    private val contrastTime=3000L
+    private val contrastTime=2000L
 
      private var mExitTime:Long=0
 
@@ -34,10 +32,11 @@ class MainActivity : BaseVMActivity<ActivityMainBinding, MainViewModel>() {
 
 
     override fun observeData() {
+
         binding.apply {
             //通过Fragment管理器的Id查找到NavHostFragment
             val navHostFragment =
-                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as FixNavHostFragment
             //获取导航控制器
             controller = navHostFragment.navController
             //初始化FixFragmentNavigator实例
@@ -50,7 +49,6 @@ class MainActivity : BaseVMActivity<ActivityMainBinding, MainViewModel>() {
             //控制器与bottomNavigationView联动
             bottomNavigationView.setupWithNavController(controller)
 
-//            bottomNavigationView.setupWithNavController(navHostFragment.navController)
         }
 
 
