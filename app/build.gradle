@@ -48,6 +48,7 @@ android {
 
     buildFeatures {
         dataBinding true
+        viewBinding true
     }
 }
 
@@ -109,5 +110,9 @@ dependencies {
 
     //RecyclerViewAdapterHelper
     api "com.github.CymChad:BaseRecyclerViewAdapterHelper:$recycleview_adapter_helper_version"
+
+    //banner
+    api "com.github.zhpanvip:BannerViewPager:$banner_version"
+
 
 }

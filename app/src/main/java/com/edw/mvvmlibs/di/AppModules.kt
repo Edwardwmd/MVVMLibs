@@ -3,6 +3,7 @@ package com.edw.mvvmlibs.di
 
 import android.animation.FloatEvaluator
 import android.animation.ValueAnimator
+import com.edw.mvvmlibs.adapter.DiscoveryAdapter
 import com.edw.mvvmlibs.net.client.RetrofitClient
 import com.edw.mvvmlibs.utils.Constant
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -20,14 +21,16 @@ import org.koin.dsl.module
 private val roomModule = module {
 
 }
-val launcherModule= module {
-
-    factory { ValueAnimator.ofObject(FloatEvaluator(),1.0F,1.2F).setDuration(Constant.ANIM_DRUATION) }
+val launcherModule = module {
+    factory {
+        ValueAnimator.ofObject(FloatEvaluator(), 1.0F, 1.2F).setDuration(Constant.ANIM_DRUATION)
+    }
 }
 
- val otherModule = module {
-    factory { CompositeDisposable()}
+val otherModule = module {
+    factory { CompositeDisposable() }
     single { RetrofitClient.instance }
+    factory { DiscoveryAdapter() }
 }
 
 val appModules = listOf(

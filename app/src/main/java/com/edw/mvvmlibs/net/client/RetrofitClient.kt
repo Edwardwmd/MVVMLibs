@@ -1,11 +1,13 @@
 package com.edw.mvvmlibs.net.client
 
+import com.edw.mvvmlibs.entity.BaseTypeBean
+import com.edw.mvvmlibs.net.deserialization.OrderedInfoDeserializer
 import com.edw.mvvmlibs.net.api.Api
-import com.edw.mvvmlibs.net.api.ApiServices
-import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Converter
 import retrofit2.Retrofit
 
 import java.util.concurrent.TimeUnit
@@ -31,8 +33,15 @@ class RetrofitClient constructor() {
             .Builder()
             .client(initOkhttp())
             .baseUrl(Api.BASE_URL)
-            .addConverterFactory(LenientGsonConverterFactory.create(Gson()))
+            .addConverterFactory(initGsonFactory())
             .build()
+    }
+
+    private fun initGsonFactory(): Converter.Factory {
+        val gson =
+            GsonBuilder().registerTypeAdapter(BaseTypeBean::class.java, OrderedInfoDeserializer())
+                .create()
+        return LenientGsonConverterFactory.create(gson)
     }
 
     private fun initOkhttp(): OkHttpClient {

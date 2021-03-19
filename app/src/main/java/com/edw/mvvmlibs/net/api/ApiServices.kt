@@ -1,9 +1,8 @@
 package com.edw.mvvmlibs.net.api
 
-import com.edw.mvvmlibs.bean.Categories
-import com.edw.mvvmlibs.bean.HomeBaseItem
-import com.edw.mvvmlibs.bean.ResultData
-import io.reactivex.rxjava3.core.Observable
+import com.edw.mvvmlibs.entity.Categories
+import com.edw.mvvmlibs.entity.HomeBaseItem
+import com.edw.mvvmlibs.entity.ResultData
 import retrofit2.http.GET
 import retrofit2.http.Query
 

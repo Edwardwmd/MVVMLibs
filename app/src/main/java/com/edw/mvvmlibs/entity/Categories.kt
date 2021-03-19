@@ -1,4 +1,4 @@
-package com.edw.mvvmlibs.bean
+package com.edw.mvvmlibs.entity
 
 /**
  * Author: EdwardWMD

@@ -4,15 +4,14 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.edw.mvvmlibs.bean.HomeBaseItem
-import com.edw.mvvmlibs.bean.ResultData
+import com.edw.mvvmlibs.entity.HomeBaseItem
+import com.edw.mvvmlibs.entity.ResultData
 import com.edw.mvvmlibs.net.client.NetworkStatusManager
 import com.edw.mvvmlibs.net.repository.HomeRepository
 import com.edw.mvvmlibs.utils.LoadState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 
 
 class DiscoveryViewModel(private val repository: HomeRepository) : ViewModel() {
@@ -27,7 +26,7 @@ class DiscoveryViewModel(private val repository: HomeRepository) : ViewModel() {
                     val itemList: MutableList<HomeBaseItem>?
                     discovery = repository.discovery()
                     itemList = discovery.itemList
-                    if (itemList.size > 0) {
+                    if (itemList!!.size > 0) {
                         withContext(Dispatchers.Main) {
                             contentData.value = itemList
                             loadState.value = LoadState.SUCCESS
@@ -35,6 +34,7 @@ class DiscoveryViewModel(private val repository: HomeRepository) : ViewModel() {
                     } else {
                         withContext(Dispatchers.Main) {
                             loadState.value = LoadState.EMPTY
+
                         }
                     }
 
@@ -58,4 +58,5 @@ class DiscoveryViewModel(private val repository: HomeRepository) : ViewModel() {
     val contentData by lazy {
         MutableLiveData<MutableList<HomeBaseItem>>()
     }
+
 }

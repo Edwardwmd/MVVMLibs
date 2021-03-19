@@ -10,8 +10,10 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="light_gray">#adadad</color>
+    <color name="light_gray_500">#515151</color>
     <color name="translucent_500">#29ffffff</color>
     <color name="tab_shadow_color">#0F000000</color>
     <color name="light_gray_200">#ababab</color>
+    <color name="white_500">#f5f5f5</color>
 
 </resources>

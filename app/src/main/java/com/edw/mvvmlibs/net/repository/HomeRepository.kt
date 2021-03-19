@@ -1,10 +1,9 @@
 package com.edw.mvvmlibs.net.repository
 
-import android.os.Looper
 import android.util.Log
-import com.edw.mvvmlibs.bean.Categories
-import com.edw.mvvmlibs.bean.HomeBaseItem
-import com.edw.mvvmlibs.bean.ResultData
+import com.edw.mvvmlibs.entity.Categories
+import com.edw.mvvmlibs.entity.HomeBaseItem
+import com.edw.mvvmlibs.entity.ResultData
 import com.edw.mvvmlibs.net.api.ApiServices
 import com.edw.mvvmlibs.net.client.RetrofitClient
 import com.edw.mvvmlibs.utils.ThreadUtils

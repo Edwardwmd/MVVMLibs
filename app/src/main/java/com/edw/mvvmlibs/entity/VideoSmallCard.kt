@@ -1,4 +1,4 @@
-package com.edw.mvvmlibs.bean
+package com.edw.mvvmlibs.entity
 
 /**
  * Author: EdwardWMD
@@ -7,4 +7,6 @@ package com.edw.mvvmlibs.bean
  * Website: https://github.com/Edwardwmd
  * Desc: VideoBeanForClient
  */
-data class VideoSmallCard(val data:FollowCard.Data)
+class VideoSmallCard:BaseTypeBean() {
+    val data: FollowCard.Content.Data? = null
+}

@@ -3,13 +3,18 @@ package com.edw.mvvmlibs.ui.fragment
 
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+
 import com.edw.mvvmlibs.R
+import com.edw.mvvmlibs.adapter.DiscoveryAdapter
 import com.edw.mvvmlibs.base.BaseVmFragment
 import com.edw.mvvmlibs.databinding.FragmentDiscoveryBinding
 import com.edw.mvvmlibs.viewmodel.DiscoveryViewModel
+import org.koin.android.ext.android.inject
 
 class DiscoveryFragment private constructor() :
     BaseVmFragment<FragmentDiscoveryBinding, DiscoveryViewModel>() {
+
+    private val adapter: DiscoveryAdapter by inject()
 
     //静态内部类单例获取DiscoveryFragment
     private object SingletonHolder {
@@ -40,7 +45,7 @@ class DiscoveryFragment private constructor() :
 
         vm.contentData.observe(this, Observer {
             //更新数据
-
+            adapter.setList(it)
         })
     }
 
@@ -48,9 +53,10 @@ class DiscoveryFragment private constructor() :
         binding.run {
             recyDiscovery.layoutManager = LinearLayoutManager(context)
             recyDiscovery.setHasFixedSize(true)
-
+            recyDiscovery.adapter = adapter
         }
     }
+
 
 
 }
