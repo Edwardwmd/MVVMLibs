@@ -8,7 +8,7 @@ import com.edw.mvvmlibs.R
 import com.edw.mvvmlibs.base.BaseActivity
 import com.edw.mvvmlibs.databinding.ActivityLauncherBinding
 import com.edw.mvvmlibs.utils.Constant
-import com.edw.mvvmlibs.utils.FontsUtils
+import com.edw.mvvmlibs.utils.TextUtils
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -30,9 +30,9 @@ class LauncherActivity : BaseActivity<ActivityLauncherBinding>() {
 
         //设置字体
         binding.tvLauncherTipsTop.typeface =
-            FontsUtils.setTextStyle(FontsUtils.Type.FZLANTINGHEI_L)
+            TextUtils.setTextStyle(TextUtils.Type.FZLANTINGHEI_L)
         binding.tvLauncherTipsBottom.typeface =
-            FontsUtils.setTextStyle(FontsUtils.Type.FZLANTINGHEI_L)
+            TextUtils.setTextStyle(TextUtils.Type.FZLANTINGHEI_L)
 
         animator.addUpdateListener {
             //针对XY轴进行缩放

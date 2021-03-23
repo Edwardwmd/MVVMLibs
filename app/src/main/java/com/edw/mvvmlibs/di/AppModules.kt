@@ -30,7 +30,7 @@ val launcherModule = module {
 val otherModule = module {
     factory { CompositeDisposable() }
     single { RetrofitClient.instance }
-    factory { DiscoveryAdapter() }
+//    factory { DiscoveryAdapter() }
 }
 
 val appModules = listOf(

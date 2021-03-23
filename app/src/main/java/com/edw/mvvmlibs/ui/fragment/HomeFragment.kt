@@ -6,7 +6,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.edw.mvvmlibs.R
 import com.edw.mvvmlibs.base.BaseFragment
 import com.edw.mvvmlibs.databinding.FragmentHomeBinding
-import com.edw.mvvmlibs.utils.FontsUtils
+import com.edw.mvvmlibs.utils.TextUtils
 import com.edw.mvvmlibs.utils.ToastUtils
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -22,7 +22,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun initData() {
-        binding.tvLogoName.typeface = FontsUtils.setTextStyle(FontsUtils.Type.REFLISATTA)
+        binding.tvLogoName.typeface = TextUtils.setTextStyle(TextUtils.Type.REFLISATTA)
 
         //水平viewpage
         binding.vpHome.orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             override fun createFragment(position: Int): Fragment {
                 var fragment: Fragment? = null
                 when (position) {
-                    0 -> fragment = DiscoveryFragment.getInstance()
+                    0 -> fragment = Discovery2Fragment.getInstance()
                     1 -> fragment = RecommendFragment.getInstance()
                     2 -> fragment = DailyFragment.getInstance()
                 }

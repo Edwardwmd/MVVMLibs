@@ -1,5 +1,6 @@
 package com.edw.mvvmlibs.net.api
 
+import androidx.lifecycle.LiveData
 import com.edw.mvvmlibs.entity.Categories
 import com.edw.mvvmlibs.entity.HomeBaseItem
 import com.edw.mvvmlibs.entity.ResultData
@@ -32,6 +33,6 @@ interface ApiServices {
 
     //首页-Category
     @GET("/api/v4/categories")
-   suspend fun categories(): MutableList<Categories>
+    suspend fun categories(): MutableList<Categories>
 
 }

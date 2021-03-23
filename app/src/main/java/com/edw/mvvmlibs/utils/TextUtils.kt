@@ -1,6 +1,5 @@
 package com.edw.mvvmlibs.utils
 
-import android.content.res.AssetManager
 import android.graphics.Typeface
 import com.edw.mvvmlibs.base.BaseApp
 
@@ -11,8 +10,11 @@ import com.edw.mvvmlibs.base.BaseApp
  * Website: https://github.com/Edwardwmd
  * Desc: File Information!
  */
-object FontsUtils {
+object TextUtils {
 
+    /**
+     * 设置字体类型
+     */
     fun setTextStyle(type: Type): Typeface {
         var typeface: Typeface? = null
         when (type) {
@@ -42,8 +44,15 @@ object FontsUtils {
         return typeface!!
     }
 
+   fun beforeSubString(originalString:String,delimiter: String,missingDelimiterValue:String):String{
+       return originalString.substringBefore(delimiter,missingDelimiterValue)
+   }
+
+
+
+
     enum class Type {
-        FZLANTINGHEI_DB, FZLANTINGHEI_L, LOBSTER, BRIGHTONS,REFLISATTA
+        FZLANTINGHEI_DB, FZLANTINGHEI_L, LOBSTER, BRIGHTONS, REFLISATTA
     }
 
 }

@@ -20,30 +20,7 @@ class DiscoveryViewModel(private val repository: HomeRepository) : ViewModel() {
     fun loadData() {
         loadState.value = LoadState.LOADING
         if (NetworkStatusManager.NETWORK_CONNECTED) {
-            try {
-                viewModelScope.launch(Dispatchers.IO) {
-                    val discovery: ResultData<HomeBaseItem>?
-                    val itemList: MutableList<HomeBaseItem>?
-                    discovery = repository.discovery()
-                    itemList = discovery.itemList
-                    if (itemList!!.size > 0) {
-                        withContext(Dispatchers.Main) {
-                            contentData.value = itemList
-                            loadState.value = LoadState.SUCCESS
-                        }
-                    } else {
-                        withContext(Dispatchers.Main) {
-                            loadState.value = LoadState.EMPTY
-
-                        }
-                    }
-
-                }
-
-            } catch (e: Exception) {
-                loadState.value = LoadState.ERROR
-                Log.e(TAG, e.message.toString())
-            }
+                loadDataByPage()
         } else {
             loadState.value = LoadState.NETWORKDISCONNECTED
         }
@@ -51,12 +28,36 @@ class DiscoveryViewModel(private val repository: HomeRepository) : ViewModel() {
 
     }
 
+    private fun loadDataByPage() {
+        try {
+            viewModelScope.launch(Dispatchers.IO) {
+                val result: ResultData<HomeBaseItem> = repository.discovery()
+
+                if (result.itemList!!.size > 0) {
+                    withContext(Dispatchers.Main) {
+                        contentData.value = result
+                        loadState.value = LoadState.SUCCESS
+                    }
+                } else {
+                    withContext(Dispatchers.Main) {
+                        loadState.value = LoadState.EMPTY
+                    }
+                }
+
+            }
+
+        } catch (e: Exception) {
+            loadState.value = LoadState.ERROR
+            Log.e(TAG, e.message.toString())
+        }
+    }
+
     val loadState by lazy {
         MutableLiveData<LoadState>()
     }
 
     val contentData by lazy {
-        MutableLiveData<MutableList<HomeBaseItem>>()
+        MutableLiveData<ResultData<HomeBaseItem>>()
     }
 
 }

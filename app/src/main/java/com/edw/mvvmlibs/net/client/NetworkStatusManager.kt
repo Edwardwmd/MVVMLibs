@@ -39,6 +39,7 @@ object NetworkStatusManager {
         get() {
             return BaseApp.appContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
         }
 
     //WIFI管理器
@@ -62,7 +63,7 @@ object NetworkStatusManager {
                 val networkCapabilities =
                     CONNECTIVITY_MANAGER.getNetworkCapabilities(CONNECTIVITY_MANAGER.activeNetwork)
                 networkCapabilities?.apply {
-                    return hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)||hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                    return hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) or hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
                 }
             } else {
                 val activeNetworkInfo = CONNECTIVITY_MANAGER.activeNetworkInfo

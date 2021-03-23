@@ -1,6 +1,7 @@
 package com.edw.mvvmlibs.net.client
 
 import com.edw.mvvmlibs.entity.BaseTypeBean
+import com.edw.mvvmlibs.entity.HomeBaseItem
 import com.edw.mvvmlibs.net.deserialization.OrderedInfoDeserializer
 import com.edw.mvvmlibs.net.api.Api
 import com.google.gson.GsonBuilder
@@ -33,6 +34,7 @@ class RetrofitClient constructor() {
             .Builder()
             .client(initOkhttp())
             .baseUrl(Api.BASE_URL)
+//            .addCallAdapterFactory(LiveDataCallAdapterFactory<HomeBaseItem>())
             .addConverterFactory(initGsonFactory())
             .build()
     }

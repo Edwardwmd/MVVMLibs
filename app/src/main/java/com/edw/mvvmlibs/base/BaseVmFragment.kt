@@ -46,14 +46,14 @@ abstract class BaseVmFragment<T : ViewDataBinding, VM : ViewModel> : Fragment() 
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //初始化数据(viewmode中无操作时可调用此方法)
+        initData()
         //创建ViewModel
         initViewModel()
         //加载数据(viewmodel有数据操作调用此方法)
         startLoadData()
         //观察数据变化,更新数据(viewmodel有数据操作调用此方法)
         observeData()
-        //初始化数据(viewmode中无操作时可调用此方法)
-        initData()
         //设置事件
         initEvent()
 

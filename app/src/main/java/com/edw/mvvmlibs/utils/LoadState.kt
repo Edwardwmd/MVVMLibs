@@ -8,5 +8,5 @@ package com.edw.mvvmlibs.utils
  * Desc: File Information!
  */
 enum class LoadState {
-    LOADING,SUCCESS,ERROR,NONE,EMPTY,NETWORKDISCONNECTED
+    LOADING,SUCCESS,ERROR,EMPTY,NETWORKDISCONNECTED
 }

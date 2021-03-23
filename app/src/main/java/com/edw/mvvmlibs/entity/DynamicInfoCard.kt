@@ -67,7 +67,7 @@ class DynamicInfoCard:BaseTypeBean() {
         val collected: Boolean = false
         val consumption: String? = null
         val count: Int = 0
-        val cover: FollowCard.Content.Data.Cover? = null
+        val cover: VideoSmallCard.Author.Follow? = null
         val description: String? = null
         val duration: Int = 0
         val id: Int = 0

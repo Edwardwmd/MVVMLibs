@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="Tags"
+            type="com.edw.mvvmlibs.entity.VideoSmallCard.Tag" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:background="@drawable/bg_birefcard"
+        android:layout_marginTop="@dimen/dp_10">
+
+
+        <ImageView
+            android:id="@+id/iv_follow_video_cut"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="1px"
+           android:layout_marginBottom="1px"
+            android:layout_marginTop="1px"
+            android:scaleType="fitXY"
+            imageUrl="@{Tags.bgPicture}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/daily_label" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="5dp"
+            android:singleLine="false"
+            android:text="@{Tags.name}"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="@+id/guideline9"
+            app:layout_constraintTop_toTopOf="@+id/guideline11" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.35" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.65" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#影视"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/light_gray_500"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline12"
+            app:layout_constraintStart_toStartOf="@+id/guideline9" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -13,7 +13,7 @@ class BriefCard :BaseTypeBean(){
     val dataType: String? = null
     val description: String? = null
     val expert: Boolean = false
-    val follow: FollowCard.Content.Data.Author.Follow? = null
+    val follow: VideoSmallCard.Author.Follow? = null
     val icon: String? = null
     val iconType: String? = null
     val id: Int = 0

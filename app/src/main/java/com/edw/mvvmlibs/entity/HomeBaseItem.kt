@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName
  */
 
 //实体类字段名应该通过@SerializedName("")来规范成java标准命名格式。
-class HomeBaseItem {
+class HomeBaseItem{
     @SerializedName("adIndex")
     val adIndex: Int = 0
 

@@ -2,6 +2,7 @@ package com.edw.mvvmlibs.adapter.provide
 
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.chad.library.adapter.base.provider.BaseItemProvider
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -12,7 +13,7 @@ import com.edw.mvvmlibs.entity.HomeBaseItem
 import com.edw.mvvmlibs.databinding.ItemHorizontalscrollcardBinding
 import com.edw.mvvmlibs.entity.HorizontalScrollCard
 import com.edw.mvvmlibs.utils.ToastUtils
-import com.google.android.play.core.assetpacks.bd
+
 import com.zhpan.bannerview.BannerViewPager
 import com.zhpan.bannerview.constants.IndicatorGravity
 import com.zhpan.bannerview.utils.BannerUtils
@@ -26,6 +27,7 @@ class HorizontalScrollCardProvider : BaseItemProvider<HomeBaseItem>() {
     override val layoutId: Int
         get() = R.layout.item_horizontalscrollcard
 
+
     override fun onViewHolderCreated(viewHolder: BaseViewHolder, viewType: Int) {
         DataBindingUtil.bind<ItemHorizontalscrollcardBinding>(viewHolder.itemView)
     }
@@ -36,9 +38,9 @@ class HorizontalScrollCardProvider : BaseItemProvider<HomeBaseItem>() {
         Log.e("HorizontalScrollCard-->",horizontalScrollCard.itemList!![0].data!!.image!!)
         val adapter = BannerAdapter()
         bd?.run {
-           banner.setIndicatorSliderGap(BannerUtils.dp2px(2F))//设置指示器滑块的空间
-               .setScrollDuration(800)//设置项目滚动持续时间
-               .setIndicatorGravity(IndicatorGravity.CENTER)//设置指标居中
+           banner
+               .setScrollDuration(1200)//设置项目滚动持续时间
+               .setIndicatorVisibility(View.GONE)//指标隐藏
                .setOnPageClickListener(BannerViewPager.OnPageClickListener{ itemView: View, position: Int ->
                   ToastUtils.showToast("当前是第$position 页")
                })

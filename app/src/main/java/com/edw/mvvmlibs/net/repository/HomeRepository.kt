@@ -1,6 +1,7 @@
 package com.edw.mvvmlibs.net.repository
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.edw.mvvmlibs.entity.Categories
 import com.edw.mvvmlibs.entity.HomeBaseItem
 import com.edw.mvvmlibs.entity.ResultData
@@ -23,6 +24,7 @@ class HomeRepository constructor(private val retrofit:RetrofitClient) {
             "当前线程---->",
             "当前线程ID:${Thread.currentThread().id} 当前线程是否为主线程: ${ThreadUtils.isMainThread()}"
         )
+
         return retrofit.create(ApiServices::class.java).discovery()
     }
     //首页-推荐

@@ -47,18 +47,7 @@ open class OrderedInfoDeserializer : JsonDeserializer<BaseTypeBean> {
         } else if (VIDEOSMALLCARD == numericField) {
             Gson().fromJson(json, VideoSmallCard::class.java)
         } else if (ITEMCOLLECTION == numericField) { //banner2  video
-            val secondaryType = json
-                .asJsonObject!!
-                .get("itemList")!!
-                .asJsonArray[0]
-                .asJsonObject
-                .get("type")
-                .toString()
-            if (BANNER2 == secondaryType) {
-                Gson().fromJson(json, SquareCardCollection::class.java)
-            } else {
-                Gson().fromJson(json, VideoCollectionWithBrief::class.java)
-            }
+            Gson().fromJson(json, CollectionItemCard::class.java)
 
         } else if (DYNAMICINFOCARD == numericField) {
             Gson().fromJson(json, DynamicInfoCard::class.java)

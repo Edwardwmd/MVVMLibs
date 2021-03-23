@@ -1,6 +1,7 @@
 package com.edw.mvvmlibs.adapter
 
 import com.chad.library.adapter.base.BaseProviderMultiAdapter
+import com.chad.library.adapter.base.module.LoadMoreModule
 import com.edw.mvvmlibs.adapter.provide.*
 import com.edw.mvvmlibs.entity.HomeBaseItem
 
@@ -11,7 +12,7 @@ import com.edw.mvvmlibs.entity.HomeBaseItem
  * Website: https://github.com/Edwardwmd
  * Desc: File Information!
  */
-class DiscoveryAdapter: BaseProviderMultiAdapter<HomeBaseItem>() {
+class DiscoveryAdapter: BaseProviderMultiAdapter<HomeBaseItem>(), LoadMoreModule {
 
 
 

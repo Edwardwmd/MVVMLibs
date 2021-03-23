@@ -2,6 +2,7 @@ package com.edw.mvvmlibs.ui.fragment
 
 
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.edw.mvvmlibs.R
@@ -9,6 +10,7 @@ import com.edw.mvvmlibs.adapter.DiscoveryAdapter
 import com.edw.mvvmlibs.base.BaseVmFragment
 import com.edw.mvvmlibs.databinding.FragmentDiscoveryBinding
 import com.edw.mvvmlibs.viewmodel.DiscoveryViewModel
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 class DiscoveryFragment private constructor() :
@@ -41,11 +43,18 @@ class DiscoveryFragment private constructor() :
     override fun observeData() {
         vm.loadState.observe(this, Observer {
             //更新状态
+            binding.refresh.setOnRefreshListener {
+                lifecycleScope.launch {
+
+                }
+            }
+
         })
 
         vm.contentData.observe(this, Observer {
             //更新数据
-            adapter.setList(it)
+            if (it != null)
+                adapter.setList(it.itemList)
         })
     }
 
@@ -54,9 +63,9 @@ class DiscoveryFragment private constructor() :
             recyDiscovery.layoutManager = LinearLayoutManager(context)
             recyDiscovery.setHasFixedSize(true)
             recyDiscovery.adapter = adapter
+
         }
     }
-
 
 
 }
