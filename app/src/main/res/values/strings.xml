@@ -9,7 +9,7 @@
     <string name="launcher_img_desc_text">启动页面精选图片</string>
     <string name="launcher_img_logo_desc_text">启动页面logo</string>
     <string name="logo_text_name">eyepetizeer</string>
- 
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="status_loading_text">正在加载中</string>
     <string name="status_disconeectnetwork_text">网络未连接哟~</string>

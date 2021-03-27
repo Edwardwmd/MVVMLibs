@@ -53,29 +53,37 @@ object NetworkStatusManager {
     //当前网络连接类型
     val NETWORK_CLASS: Int?
         get() {
-            return if (WIFI_CONNECTED) return CONNECTIVITY_MANAGER.activeNetworkInfo!!.type else null
+            return if (CELLPHONE_CONNECTED) return CONNECTIVITY_MANAGER.activeNetworkInfo!!.type else null
         }
 
-    val NETWORK_CONNECTED: Boolean
+    /**
+     * 手机数据连接
+     */
+    val CELLPHONE_CONNECTED: Boolean
         get() {
             if (Build.VERSION.SDK_INT >= 23) {
                 //获取网络属性
                 val networkCapabilities =
                     CONNECTIVITY_MANAGER.getNetworkCapabilities(CONNECTIVITY_MANAGER.activeNetwork)
                 networkCapabilities?.apply {
-                    return hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) or hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                    return hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED) and hasTransport(
+                        NetworkCapabilities.TRANSPORT_CELLULAR
+                    )
                 }
             } else {
                 val activeNetworkInfo = CONNECTIVITY_MANAGER.activeNetworkInfo
                 activeNetworkInfo?.apply {
-                    return isConnectedOrConnecting && activeNetworkInfo.state == NetworkInfo.State.CONNECTED
+                    return isConnectedOrConnecting && type == ConnectivityManager.TYPE_MOBILE
                 }
 
             }
             return false
         }
 
-    //当前WIFI是否可用
+    /**
+     * WIFI数据连接
+     *
+     */
     val WIFI_CONNECTED: Boolean
         get() {
 
@@ -84,7 +92,9 @@ object NetworkStatusManager {
                 val networkCapabilities =
                     CONNECTIVITY_MANAGER.getNetworkCapabilities(CONNECTIVITY_MANAGER.activeNetwork)
                 networkCapabilities?.apply {
-                    return hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                    return hasTransport(
+                        NetworkCapabilities.TRANSPORT_WIFI
+                    )
                 }
             } else {
                 val activeNetworkInfo = CONNECTIVITY_MANAGER.activeNetworkInfo

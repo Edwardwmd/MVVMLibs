@@ -3,7 +3,8 @@ package com.edw.mvvmlibs.di
 
 import android.animation.FloatEvaluator
 import android.animation.ValueAnimator
-import com.edw.mvvmlibs.adapter.DiscoveryAdapter
+import android.content.IntentFilter
+import com.edw.mvvmlibs.broadcast.NetworkStatusReceiver
 import com.edw.mvvmlibs.net.client.RetrofitClient
 import com.edw.mvvmlibs.utils.Constant
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -30,7 +31,9 @@ val launcherModule = module {
 val otherModule = module {
     factory { CompositeDisposable() }
     single { RetrofitClient.instance }
-//    factory { DiscoveryAdapter() }
+    single { NetworkStatusReceiver() }
+    single { IntentFilter() }
+
 }
 
 val appModules = listOf(

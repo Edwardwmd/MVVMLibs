@@ -10,11 +10,9 @@ import com.edw.mvvmlibs.entity.HomeBaseItem
  * Data: 2021/3/18
  * Project: MVVMLibs
  * Website: https://github.com/Edwardwmd
- * Desc: File Information!
+ * 主页面Adapter
  */
-class DiscoveryAdapter: BaseProviderMultiAdapter<HomeBaseItem>(), LoadMoreModule {
-
-
+class HomePageAdapter: BaseProviderMultiAdapter<HomeBaseItem>(), LoadMoreModule {
 
    init {
        addItemProvider(HorizontalScrollCardProvider())

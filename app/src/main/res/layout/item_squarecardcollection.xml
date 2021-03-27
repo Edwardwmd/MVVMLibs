@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="SquareCardCollection"
             type="com.edw.mvvmlibs.entity.CollectionItemCard" />
@@ -29,6 +30,7 @@
                 android:layout_marginLeft="20dp"
                 android:text="@{SquareCardCollection.header.title}"
                 android:textColor="@color/light_gray_500"
+                android:textSize="@dimen/sp_14"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -50,6 +52,18 @@
                 android:layout_marginStart="15dp"
                 android:background="@color/light_gray_200"
                 app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:text="@{SquareCardCollection.header.subTitle}"
+                android:textColor="@color/light_gray_500"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ic_right" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.zhpan.bannerview.BannerViewPager
@@ -59,6 +73,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recy_follow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/banner_square" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

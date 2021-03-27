@@ -33,6 +33,7 @@ abstract class BaseRecyAdapter<T, DB : ViewDataBinding> :
      */
     fun setAllDatas(datas: MutableList<T>?) {
         if (datas == null) return
+        this.datas.clear()
         this.datas.addAll(datas)
         notifyDataSetChanged()
     }

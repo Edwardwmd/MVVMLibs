@@ -81,6 +81,10 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     api "androidx.room:room-ktx:$room_version"
 
+    // Coroutines
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+
 
     //Koin依赖注入框架
     api "org.koin:koin-androidx-scope:$koin_version"
@@ -113,6 +117,11 @@ dependencies {
 
     //banner
     api "com.github.zhpanvip:BannerViewPager:$banner_version"
+
+    //SmartRefresh
+    api  "com.scwang.smart:refresh-layout-kernel:$refresh_version"
+    api  "com.scwang.smart:refresh-header-material:$refresh_version"
+    api  "com.scwang.smart:refresh-footer-classics:$refresh_version"
 
 
 }

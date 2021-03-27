@@ -1,6 +1,7 @@
 package com.edw.mvvmlibs.base
 
 import android.annotation.SuppressLint
+import android.content.IntentFilter
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,27 +12,46 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseProviderMultiAdapter
 import com.edw.mvvmlibs.R
+import com.edw.mvvmlibs.broadcast.NetworkStatusReceiver
 import com.edw.mvvmlibs.databinding.FragmentBaseRefreshBinding
+import com.edw.mvvmlibs.ui.activity.MainActivity
+import com.edw.mvvmlibs.utils.Constant
+import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.compat.ViewModelCompat
 
 
 abstract class BaseRefreshFragment<T, VM : ViewModel> :
-    Fragment() {
+    Fragment(), NetworkStatusReceiver.CallBackNetwork {
 
 
     protected var vm: VM? = null
 
-    protected lateinit var mAdapter: BaseProviderMultiAdapter<T>
+    protected var mAdapter: BaseProviderMultiAdapter<T>? = null
 
     protected lateinit var binding: FragmentBaseRefreshBinding
 
-    protected lateinit var mRecy: RecyclerView
+    private lateinit var mRecy: RecyclerView
 
-    protected lateinit var mRefreshLayout: SwipeRefreshLayout
+    protected lateinit var mRefreshLayout: SmartRefreshLayout
+
+    protected lateinit var emptyView: View
+
+    protected lateinit var disconnectNetworkView: View
+
+    protected lateinit var errorView: View
+
+    protected lateinit var loadingView: View
+
+    private val receiver by inject<NetworkStatusReceiver>()
+
+    private val intentFilter by inject<IntentFilter>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,36 +69,45 @@ abstract class BaseRefreshFragment<T, VM : ViewModel> :
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mRecy = binding.recyBase
-        mRefreshLayout = binding.swipeRefresh
+        initView()
+
+        initAdapter()
 
         initViewModel()
 
         initData()
 
-        initAdapter()
-
-        initRefresh()
-
-        loadMoreData()
-
         observerData()
+
+        initEvent()
+    }
+
+
+    open fun observerData() {}
+
+    private fun initView() {
+        mRecy = binding.recyBase
+        mRefreshLayout = binding.swipeRefresh
+        loadingView = binding.loadingView.clLoading
+        emptyView = binding.emptyView.clEmpty
+        disconnectNetworkView = binding.disconnectNetworkView.clDisconnectNetwork
+        errorView = binding.errorView.clError
+        mRefreshLayout.setEnableAutoLoadMore(true)
+        mRefreshLayout.setRefreshFooter(ClassicsFooter(activity))
+
 
     }
 
-    open fun initData() {}
-    open fun observerData() {}
+    open fun initData() {
+        intentFilter.addAction(Constant.CONNECTIVITY_CHANGE)
+        (activity as MainActivity).registerReceiver(receiver, intentFilter)
+        receiver.setCallBackNetwork(this)
+    }
 
-    private fun loadMoreData() {
-        mAdapter.loadMoreModule.setOnLoadMoreListener {
-            questData()
+    open fun initEvent() {
+        binding.disconnectNetworkView.ivDisconnectNetwork.setOnClickListener {
+            binding.disconnectNetworkView.tvDisconnectNetwork.text = "请打开网络哟 ^V^"
         }
-        //自动加载更多
-        mAdapter.loadMoreModule.isAutoLoadMore = true
-
-        //当自动加载开启，同时数据不满一屏时，是否继续执行自动加载更多(默认为true)
-        mAdapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = false
-
     }
 
     private fun initAdapter() {
@@ -106,28 +135,6 @@ abstract class BaseRefreshFragment<T, VM : ViewModel> :
 
     }
 
-    private fun initRefresh() {
-        mRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189))
-        mRefreshLayout.setOnRefreshListener {
-            refreshData()
-        }
-    }
-
-
-    open fun refreshData() {
-
-        //这里的作用是防止下拉刷新的时候还可以上拉加载
-        mAdapter.loadMoreModule.isEnableLoadMore = false
-        //加载数据
-        questData()
-    }
-
-    open fun questData() {}
-
-    /**
-     * 初始化Adapter
-     */
-    abstract fun startAdapter(): BaseProviderMultiAdapter<T>
 
     @SuppressLint("NewApi")
     private fun initViewModel() {
@@ -137,22 +144,49 @@ abstract class BaseRefreshFragment<T, VM : ViewModel> :
 
     abstract fun getViewModelClazz(): Class<VM>
 
-
+    /**
+     * 隐藏状态
+     */
     open fun initHideView() {
-        binding.run {
-//            loadingView.clLoading.visibility = View.GONE
-//            errorView.clError.visibility = View.GONE
-//            emptyView.clEmpty.visibility = View.GONE
-//            disconnectNetworkView.clDisconnectNetwork.visibility = View.GONE
-        }
-
+        loadingView.visibility = View.GONE
+        errorView.visibility = View.GONE
+        emptyView.visibility = View.GONE
+        emptyView.visibility = View.GONE
     }
+
+    open fun commonFooter(): View {
+        return layoutInflater.inflate(R.layout.item_commom_footer, mRecy, false)
+    }
+
+    override fun callBack(typeName: String?) {
+        if (Constant.CONNECTING == typeName) {
+            broadcastDataChange()
+            disconnectNetworkView.visibility = View.GONE
+            binding.disconnectNetworkView.tvDisconnectNetwork.text = "网络断开连接咯 !-_-!"
+        } else {
+            disconnectNetworkView.visibility = View.VISIBLE
+            mRefreshLayout.visibility = View.GONE
+        }
+    }
+
+    /**
+     * 初始化Adapter
+     */
+    abstract fun startAdapter(): BaseProviderMultiAdapter<T>
+
+    /**
+     * 通过广播实时监听网络是否连接,连接后加载数据
+     */
+    abstract fun broadcastDataChange()
 
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding.unbind()
         vm = null
+        mAdapter!!.data.clear()
+        mAdapter = null
+        (activity as MainActivity).unregisterReceiver(receiver)
     }
 
 }

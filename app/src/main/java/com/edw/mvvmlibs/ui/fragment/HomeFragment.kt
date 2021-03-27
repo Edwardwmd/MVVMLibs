@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             override fun createFragment(position: Int): Fragment {
                 var fragment: Fragment? = null
                 when (position) {
-                    0 -> fragment = Discovery2Fragment.getInstance()
+                    0 -> fragment = DiscoveryFragment.getInstance()
                     1 -> fragment = RecommendFragment.getInstance()
                     2 -> fragment = DailyFragment.getInstance()
                 }

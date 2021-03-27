@@ -5,8 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.provider.BaseItemProvider
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.edw.mvvmlibs.R
+import com.edw.mvvmlibs.adapter.secondryadapter.VideoCollectionWithBriefLevelAdapter
 import com.edw.mvvmlibs.adapter.CardViewType
-import com.edw.mvvmlibs.adapter.VideoCollectionWithBriefFooterAdapter
 import com.edw.mvvmlibs.databinding.ItemVideocollectionwithbriefBinding
 import com.edw.mvvmlibs.entity.HomeBaseItem
 
@@ -33,7 +33,7 @@ VideoCollectionWithBriefProvider : BaseItemProvider<HomeBaseItem>() {
         val videoCollectionWithBrief = item.data as CollectionItemCard
         val itemList = videoCollectionWithBrief.itemList
 
-        val adapter = VideoCollectionWithBriefFooterAdapter()
+        val adapter = VideoCollectionWithBriefLevelAdapter()
 
         binding?.run {
             if (itemList != null && itemList.size > 0) {
@@ -41,12 +41,7 @@ VideoCollectionWithBriefProvider : BaseItemProvider<HomeBaseItem>() {
                     LinearLayoutManager(root.context, LinearLayoutManager.VERTICAL, false)
                 recyVcwb.setHasFixedSize(true)
                 recyVcwb.adapter = adapter
-                itemList.forEach {
-                    adapter.setAllDatas(it.data!!.tags)
-                    this.videoCollectionWithBriefData = it.data
-                    executePendingBindings()
-                }
-
+                adapter.setAllDatas(itemList)
             }
 
 

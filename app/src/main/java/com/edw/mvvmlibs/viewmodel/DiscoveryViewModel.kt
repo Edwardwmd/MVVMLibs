@@ -6,58 +6,59 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.edw.mvvmlibs.entity.HomeBaseItem
 import com.edw.mvvmlibs.entity.ResultData
-import com.edw.mvvmlibs.net.client.NetworkStatusManager
 import com.edw.mvvmlibs.net.repository.HomeRepository
 import com.edw.mvvmlibs.utils.LoadState
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.edw.mvvmlibs.viewmodel.base.IViewModel
+import kotlinx.coroutines.*
 
 
-class DiscoveryViewModel(private val repository: HomeRepository) : ViewModel() {
+class DiscoveryViewModel(repository: HomeRepository) : ViewModel(), IViewModel {
     private val TAG = this.javaClass.simpleName
 
-    fun loadData() {
-        loadState.value = LoadState.LOADING
-        if (NetworkStatusManager.NETWORK_CONNECTED) {
-                loadDataByPage()
-        } else {
-            loadState.value = LoadState.NETWORKDISCONNECTED
-        }
+    private var repository: HomeRepository? = null
 
-
+    init {
+        this.repository = repository
     }
 
-    private fun loadDataByPage() {
-        try {
-            viewModelScope.launch(Dispatchers.IO) {
-                val result: ResultData<HomeBaseItem> = repository.discovery()
-
-                if (result.itemList!!.size > 0) {
-                    withContext(Dispatchers.Main) {
-                        contentData.value = result
-                        loadState.value = LoadState.SUCCESS
-                    }
-                } else {
-                    withContext(Dispatchers.Main) {
-                        loadState.value = LoadState.EMPTY
-                    }
-                }
-
-            }
-
-        } catch (e: Exception) {
-            loadState.value = LoadState.ERROR
-            Log.e(TAG, e.message.toString())
-        }
-    }
-
-    val loadState by lazy {
+    val loadStatus by lazy {
         MutableLiveData<LoadState>()
     }
 
     val contentData by lazy {
         MutableLiveData<ResultData<HomeBaseItem>>()
+    }
+
+
+    override fun loadData(page: Int, date: Long, num: Int) {
+        loadStatus.value = LoadState.LOADING
+        try {
+            viewModelScope.launch() {
+                val result: ResultData<HomeBaseItem> =
+                    this@DiscoveryViewModel.repository!!.discovery()
+
+                if (result.itemList!!.size > 0) {
+                    contentData.value = result
+                    loadStatus.value = LoadState.SUCCESS
+                    Log.d(TAG, "SUCCESS---> 数据: ${result.itemList}")
+                } else {
+                    loadStatus.value = LoadState.EMPTY
+                    Log.d(TAG, "EMPTY---> 数据: ${result.itemList}")
+                }
+            }
+
+        } catch (e: Exception) {
+            Log.e(TAG, e.message.toString())
+            loadStatus.value = LoadState.ERROR
+        }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
+        if (repository != null) {
+            repository = null
+        }
     }
 
 }

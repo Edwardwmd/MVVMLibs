@@ -32,29 +32,30 @@ open class OrderedInfoDeserializer : JsonDeserializer<BaseTypeBean> {
         json: JsonElement?,
         typeOfT: Type?,
         context: JsonDeserializationContext?
-    ): BaseTypeBean {
+    ): BaseTypeBean? {
+        try {
+            val numericField = json!!.asJsonObject.get("dataType").asString
 
-        val numericField = json!!.asJsonObject.get("dataType").asString
+            return if (HORIZONTALSCROLLCARD == numericField) {
+                Gson().fromJson(json, HorizontalScrollCard::class.java)
+            } else if (TEXTCARD == numericField) {
+                Gson().fromJson(json, TextCard::class.java)
+            } else if (BRIEFCARD == numericField) {
+                Gson().fromJson(json, BriefCard::class.java)
+            } else if (FOLLOWCARD == numericField) {
+                Gson().fromJson(json, FollowCard::class.java)
+            } else if (VIDEOSMALLCARD == numericField) {
+                Gson().fromJson(json, VideoSmallCard::class.java)
+            } else if (ITEMCOLLECTION == numericField) { //banner2  video
+                Gson().fromJson(json, CollectionItemCard::class.java)
+            } else {
+                Gson().fromJson(json, DynamicInfoCard::class.java)
+            }
 
-        return if (HORIZONTALSCROLLCARD == numericField) {
-            Gson().fromJson(json, HorizontalScrollCard::class.java)
-        } else if (TEXTCARD == numericField) {
-            Gson().fromJson(json, TextCard::class.java)
-        } else if (BRIEFCARD == numericField) {
-            Gson().fromJson(json, BriefCard::class.java)
-        } else if (FOLLOWCARD == numericField) {
-            Gson().fromJson(json, FollowCard::class.java)
-        } else if (VIDEOSMALLCARD == numericField) {
-            Gson().fromJson(json, VideoSmallCard::class.java)
-        } else if (ITEMCOLLECTION == numericField) { //banner2  video
-            Gson().fromJson(json, CollectionItemCard::class.java)
-
-        } else if (DYNAMICINFOCARD == numericField) {
-            Gson().fromJson(json, DynamicInfoCard::class.java)
-        } else {
-            Gson().fromJson(json, BaseTypeBean::class.java)
+        } catch (e: Exception) {
+         Log.e(TAG,e.message.toString())
         }
 
-
+        return null
     }
 }

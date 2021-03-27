@@ -8,6 +8,8 @@ import com.edw.mvvmlibs.entity.ResultData
 import com.edw.mvvmlibs.net.api.ApiServices
 import com.edw.mvvmlibs.net.client.RetrofitClient
 import com.edw.mvvmlibs.utils.ThreadUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * Author: EdwardWMD
@@ -16,29 +18,39 @@ import com.edw.mvvmlibs.utils.ThreadUtils
  * Website: https://github.com/Edwardwmd
  * Desc: File Information!
  */
-class HomeRepository constructor(private val retrofit:RetrofitClient) {
+class HomeRepository constructor(private val retrofit: RetrofitClient) {
 
     //首页-发现
     suspend fun discovery(): ResultData<HomeBaseItem> {
-        Log.e(
-            "当前线程---->",
-            "当前线程ID:${Thread.currentThread().id} 当前线程是否为主线程: ${ThreadUtils.isMainThread()}"
-        )
 
-        return retrofit.create(ApiServices::class.java).discovery()
+        return withContext(Dispatchers.IO) {
+            Log.e(
+                "协程",
+                "当前线程ID:${Thread.currentThread().id} 当前线程是否为主线程: ${ThreadUtils.isMainThread()}"
+            )
+            retrofit.create(ApiServices::class.java).discovery()
+        }
     }
+
     //首页-推荐
     suspend fun allRec(page: Int): ResultData<HomeBaseItem> {
-        return retrofit.create(ApiServices::class.java).allRec(page)
+        return withContext(Dispatchers.IO) {
+            retrofit.create(ApiServices::class.java).allRec(page)
+        }
     }
 
     //首页日报
-    suspend fun feed(date: Long, num: Int): ResultData<HomeBaseItem> {
-        return retrofit.create(ApiServices::class.java).feed(date, num)
+    suspend fun daily(date: Long, num: Int): ResultData<HomeBaseItem> {
+        return withContext(Dispatchers.IO) {
+            retrofit.create(ApiServices::class.java).daily(date, num)
+        }
+
     }
 
-    suspend fun categories():MutableList<Categories>{
-        return RetrofitClient.instance.create(ApiServices::class.java).categories()
+    suspend fun categories(): MutableList<Categories> {
+        return withContext(Dispatchers.IO) {
+            RetrofitClient.instance.create(ApiServices::class.java).categories()
+        }
     }
 
 }

@@ -9,6 +9,7 @@ import com.edw.mvvmlibs.R
 import com.edw.mvvmlibs.adapter.CardViewType
 import com.edw.mvvmlibs.databinding.ItemBirefcardBinding
 
+
 import com.edw.mvvmlibs.entity.BriefCard
 import com.edw.mvvmlibs.entity.HomeBaseItem
 

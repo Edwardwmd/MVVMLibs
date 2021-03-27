@@ -7,6 +7,7 @@ import com.edw.mvvmlibs.R
 import com.edw.mvvmlibs.adapter.CardViewType
 import com.edw.mvvmlibs.entity.HomeBaseItem
 import com.edw.mvvmlibs.databinding.ItemDynamicinfocardBinding
+import com.edw.mvvmlibs.entity.DynamicInfoCard
 
 class DynamicInfoCardProvider : BaseItemProvider<HomeBaseItem>() {
 
@@ -21,6 +22,14 @@ class DynamicInfoCardProvider : BaseItemProvider<HomeBaseItem>() {
     }
 
     override fun convert(helper: BaseViewHolder, item: HomeBaseItem) {
+        val binding = DataBindingUtil.getBinding<ItemDynamicinfocardBinding>(helper.itemView)
+        val dynamicInfoCard = item.data as DynamicInfoCard
+
+        binding?.apply {
+            this.dynamicInfoCard = dynamicInfoCard
+            executePendingBindings()
+        }
+
 
     }
 

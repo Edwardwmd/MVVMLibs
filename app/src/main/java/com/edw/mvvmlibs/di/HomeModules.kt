@@ -23,7 +23,7 @@ val homeRepoModule = module {
 
 val homeViewModelModule = module {
     viewModel { DiscoveryViewModel(repository = get()) }
-    viewModel { RecommendViewModel() }
-    viewModel { DailyViewModel() }
+    viewModel { RecommendViewModel(repository = get()) }
+    viewModel { DailyViewModel(repository = get()) }
 
 }

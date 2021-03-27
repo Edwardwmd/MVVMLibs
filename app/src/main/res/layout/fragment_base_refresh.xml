@@ -12,28 +12,34 @@
         android:layout_height="match_parent"
         tools:context=".base.BaseRefreshFragment">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
             android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:srlPrimaryColor="@color/dark_black"
+            app:srlAccentColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+            <com.scwang.smart.refresh.header.MaterialHeader
+                android:id="@+id/materialHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recy_base"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
-<!--        <include-->
-<!--            android:id="@+id/loadingView"-->
-<!--            layout="@layout/status_loading_view"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:visibility="gone" />-->
+        <include
+            android:id="@+id/loadingView"
+            layout="@layout/status_loading_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
 
         <include
             android:id="@+id/errorView"

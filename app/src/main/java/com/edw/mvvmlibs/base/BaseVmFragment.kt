@@ -25,7 +25,7 @@ import org.koin.androidx.viewmodel.compat.ViewModelCompat.getViewModel
  */
 abstract class BaseVmFragment<T : ViewDataBinding, VM : ViewModel> : Fragment() {
 
-    protected lateinit var vm: VM
+    protected var vm: VM? = null
 
     protected lateinit var binding: T
 
@@ -34,7 +34,7 @@ abstract class BaseVmFragment<T : ViewDataBinding, VM : ViewModel> : Fragment() 
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.e("被创建---->","!!!!!!")
+        Log.e("被创建---->", "!!!!!!")
         binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
         return binding.root
     }
@@ -61,7 +61,7 @@ abstract class BaseVmFragment<T : ViewDataBinding, VM : ViewModel> : Fragment() 
 
     open fun initData() {}
 
-    open fun startLoadData(){}
+    open fun startLoadData() {}
 
     open fun initEvent() {}
 
@@ -70,7 +70,7 @@ abstract class BaseVmFragment<T : ViewDataBinding, VM : ViewModel> : Fragment() 
     @SuppressLint("NewApi")
     private fun initViewModel() {
         //使用Koin依赖注入获取ViewModel
-        vm=getViewModel(this,getViewModelClazz())
+        vm = getViewModel(this, getViewModelClazz())
     }
 
     abstract fun getViewModelClazz(): Class<VM>

@@ -1,10 +1,14 @@
 package com.edw.mvvmlibs.ui.activity
 
+import android.content.BroadcastReceiver
+import android.content.IntentFilter
+import android.util.Log
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupWithNavController
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.edw.mvvmlibs.R
 import com.edw.mvvmlibs.base.BaseVMActivity
+import com.edw.mvvmlibs.broadcast.NetworkStatusReceiver
 import com.edw.mvvmlibs.databinding.ActivityMainBinding
 import com.edw.mvvmlibs.ui.fragment.FixNavHostFragment
 
@@ -14,6 +18,8 @@ import com.edw.mvvmlibs.utils.Constant
 import com.edw.mvvmlibs.utils.TimeUtils
 import com.edw.mvvmlibs.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
+import org.koin.android.ext.android.inject
+import org.koin.experimental.property.inject
 import kotlin.system.exitProcess
 
 
@@ -22,16 +28,16 @@ class MainActivity : BaseVMActivity<ActivityMainBinding, MainViewModel>() {
 
     lateinit var controller: NavController
 
-    private val contrastTime=2000L
+    private val contrastTime = 2000L
 
-     private var mExitTime:Long=0
+    private var mExitTime: Long = 0
 
     override fun getLayoutRes(): Int {
         return R.layout.activity_main
     }
 
 
-    override fun observeData() {
+    override fun initData() {
 
         binding.apply {
             //通过Fragment管理器的Id查找到NavHostFragment
@@ -48,11 +54,9 @@ class MainActivity : BaseVMActivity<ActivityMainBinding, MainViewModel>() {
             controller.setGraph(R.navigation.nav_mvvm_fragment)//手动添加
             //控制器与bottomNavigationView联动
             bottomNavigationView.setupWithNavController(controller)
-
         }
-
-
     }
+
 
     override fun getViewModelClass(): Class<MainViewModel> {
         return MainViewModel::class.java
@@ -62,13 +66,14 @@ class MainActivity : BaseVMActivity<ActivityMainBinding, MainViewModel>() {
 //        如果调用 super.onBackPressed()，navigation会操作回退栈,切换到之前显示的页面，导致页面叠加错乱
 //        super.onBackPressed()
 
-        if (TimeUtils.currentTimes()-mExitTime>contrastTime){
-           Snackbar.make(binding.root,"再按一次退出App",1200).show()
-            mExitTime=TimeUtils.currentTimes()
-        }else{
+        if (TimeUtils.currentTimes() - mExitTime > contrastTime) {
+            Snackbar.make(binding.root, "再按一次退出App", 1200).show()
+            mExitTime = TimeUtils.currentTimes()
+        } else {
             exitProcess(0)
         }
 
     }
+
 
 }

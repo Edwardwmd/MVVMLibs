@@ -1,4 +1,4 @@
-package com.edw.mvvmlibs.adapter
+package com.edw.mvvmlibs.adapter.secondryadapter
 
 import android.util.Log
 import androidx.databinding.DataBindingUtil
@@ -26,7 +26,7 @@ class SquareBannerAdapter : BaseBannerAdapter<CollectionItemCard.Item>() {
             DataBindingUtil.bind(holder!!.itemView)
         binding?.run {
             Log.e("squarecard---->","imageUrl--->${data!!.data!!.image}")
-            this.squareCardCollection =data!!.data
+            this.squareCardCollection =data.data
             executePendingBindings()
         }
     }

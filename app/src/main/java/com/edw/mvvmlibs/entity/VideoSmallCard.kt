@@ -28,7 +28,7 @@ class VideoSmallCard : BaseTypeBean() {
         val idx: Int = 0
         val ifLimitVideo: Boolean = false
         val label: HorizontalScrollCard.Item.Data.Label? = null
-        val labelList: MutableList<String>? = null
+        val labelList: MutableList<HorizontalScrollCard.Item.Data.Label>? = null
         val lastViewTime: String? = null
         val library: String? = null
         val playInfo: MutableList<PlayInfo>? = null

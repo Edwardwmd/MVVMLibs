@@ -2,12 +2,11 @@ package com.edw.mvvmlibs.adapter.provide
 
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.chad.library.adapter.base.provider.BaseItemProvider
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.edw.mvvmlibs.R
-import com.edw.mvvmlibs.adapter.BannerAdapter
+import com.edw.mvvmlibs.adapter.secondryadapter.BannerAdapter
 import com.edw.mvvmlibs.adapter.CardViewType
 import com.edw.mvvmlibs.entity.HomeBaseItem
 import com.edw.mvvmlibs.databinding.ItemHorizontalscrollcardBinding
@@ -15,8 +14,6 @@ import com.edw.mvvmlibs.entity.HorizontalScrollCard
 import com.edw.mvvmlibs.utils.ToastUtils
 
 import com.zhpan.bannerview.BannerViewPager
-import com.zhpan.bannerview.constants.IndicatorGravity
-import com.zhpan.bannerview.utils.BannerUtils
 
 
 class HorizontalScrollCardProvider : BaseItemProvider<HomeBaseItem>() {

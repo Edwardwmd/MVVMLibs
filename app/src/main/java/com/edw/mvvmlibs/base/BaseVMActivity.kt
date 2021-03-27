@@ -34,9 +34,12 @@ abstract class BaseVMActivity<T : ViewDataBinding, VM : ViewModel> : AppCompatAc
         binding = DataBindingUtil.setContentView(this, getLayoutRes())
         //初始化ViewModel
         initViewModel()
+
+        initData()
+
         //观察数据变化,更新数据到UI
         observeData()
-        initData()
+
         //初始化事件
         initEvent()
     }

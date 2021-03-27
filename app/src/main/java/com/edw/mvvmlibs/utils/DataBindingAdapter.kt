@@ -1,7 +1,9 @@
 package com.edw.mvvmlibs.utils
 
+import android.text.format.DateFormat
 import android.util.Log
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -17,7 +19,7 @@ import com.edw.mvvmlibs.R
  * Website: https://github.com/Edwardwmd
  * Desc:databinding将image url绑定在adapter中
  */
-object ImageBindingAdapter {
+object DataBindingAdapter {
 
     @BindingAdapter("imageUrl")
     @JvmStatic //需要添加java的静态注解,从而生成静态方法,不添加此注解会报错
@@ -76,4 +78,18 @@ object ImageBindingAdapter {
 
         }
     }
+
+    @BindingAdapter("forDate")
+    @JvmStatic
+    fun loadTextForDate(tv: TextView?, duration: Long?){
+        if (tv != null) {
+            duration?.apply {
+               tv.text=DateFormat.format("mm:ss", duration*1000)
+            }
+
+        }
+
+    }
+
+
 }

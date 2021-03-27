@@ -7,7 +7,7 @@ import com.chad.library.adapter.base.provider.BaseItemProvider
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.edw.mvvmlibs.R
 import com.edw.mvvmlibs.adapter.CardViewType
-import com.edw.mvvmlibs.adapter.FollowTypeFooterAdapter
+import com.edw.mvvmlibs.adapter.secondryadapter.FollowTypeFooterAdapter
 import com.edw.mvvmlibs.databinding.ItemFollowcardBinding
 
 
@@ -27,27 +27,27 @@ class FollowCardProvider : BaseItemProvider<HomeBaseItem>() {
     }
 
     override fun convert(helper: BaseViewHolder, item: HomeBaseItem) {
-        val binding: ItemFollowcardBinding? = DataBindingUtil.getBinding(helper.itemView)
-        val followCard = item.data as FollowCard
-        val tags = followCard.content!!.data!!.tags
-        val adapter = FollowTypeFooterAdapter()
+        item.data?.apply {
+            val binding: ItemFollowcardBinding? = DataBindingUtil.getBinding(helper.itemView)
+            val followCard = this as FollowCard
+            val tags = followCard.content!!.data!!.tags
 
-        binding?.apply {
-            if (tags != null && tags.size > 0) {
-                val linearLayoutManager = LinearLayoutManager(root.context)
-                recyFollow.layoutManager = linearLayoutManager
+            binding?.apply {
+                if (tags != null && tags.size > 0) {
+                    val adapter = FollowTypeFooterAdapter()
+                    val linearLayoutManager = LinearLayoutManager(root.context)
+                    recyFollow.layoutManager = linearLayoutManager
 
-                recyFollow.setHasFixedSize(true)
-                recyFollow.adapter = adapter
-                adapter.setAllDatas(tags)
+                    recyFollow.setHasFixedSize(true)
+                    recyFollow.adapter = adapter
+                    adapter.setAllDatas(tags)
+                }
+                followcard = followCard
+                executePendingBindings()
+
             }
-            followcard = followCard
-            executePendingBindings()
-
         }
 
-
     }
-
 
 }

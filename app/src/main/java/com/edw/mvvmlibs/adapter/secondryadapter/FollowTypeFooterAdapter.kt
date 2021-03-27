@@ -1,10 +1,8 @@
-package com.edw.mvvmlibs.adapter
+package com.edw.mvvmlibs.adapter.secondryadapter
 
-import androidx.databinding.ViewDataBinding
 import com.edw.mvvmlibs.R
 import com.edw.mvvmlibs.adapter.base.BaseRecyAdapter
 import com.edw.mvvmlibs.databinding.ItemFolllowTagBinding
-import com.edw.mvvmlibs.entity.FollowCard
 import com.edw.mvvmlibs.entity.VideoSmallCard
 
 /**

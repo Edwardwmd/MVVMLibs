@@ -38,6 +38,9 @@ class CollectionItemCard : BaseTypeBean() {
         val label: String? = null
         val labelList: MutableList<String>? = null
         val rightText: String? = null
+        val time: Long = 0
+        val showHateVideo: String? = null
+
     }
 
     class Item {
@@ -53,8 +56,9 @@ class CollectionItemCard : BaseTypeBean() {
             val image: String? = null
             val actionUrl: String? = null
             val shade: Boolean = false
-            val header: String? = null
+            val header: Header? = null
             val autoPlay: Boolean = false
+            val content:FollowCard.Content?=null
 
 
             val ad: Boolean = false

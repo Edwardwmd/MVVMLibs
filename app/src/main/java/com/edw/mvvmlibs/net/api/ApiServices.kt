@@ -25,10 +25,10 @@ interface ApiServices {
 
     //首页-日报
     /**
-     * nextPageUrl : http://baobab.kaiyanapp.com/api/v5/index/tab/feed?date=1516842000000&num=1
+     * http://baobab.kaiyanapp.com/api/v5/index/tab/feed?date=1616842172678&num=1
      */
     @GET("api/v5/index/tab/feed")
-    suspend fun feed(@Query("date") date: Long, @Query("num") num: Int): ResultData<HomeBaseItem>
+    suspend fun daily(@Query("date") date: Long, @Query("num") num: Int): ResultData<HomeBaseItem>
 
 
     //首页-Category

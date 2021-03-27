@@ -1,4 +1,4 @@
-package com.edw.mvvmlibs.adapter
+package com.edw.mvvmlibs.adapter.secondryadapter
 
 import com.edw.mvvmlibs.R
 import com.edw.mvvmlibs.adapter.base.BaseRecyAdapter
@@ -26,6 +26,4 @@ class VideoCollectionWithBriefFooterAdapter:BaseRecyAdapter<CollectionItemCard.I
           this.videoCollectionWithBriefTag=itemBean
         }
     }
-
-
 }

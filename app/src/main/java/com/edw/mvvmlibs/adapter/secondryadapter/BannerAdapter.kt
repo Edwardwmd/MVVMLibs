@@ -1,4 +1,4 @@
-package com.edw.mvvmlibs.adapter
+package com.edw.mvvmlibs.adapter.secondryadapter
 
 
 import androidx.databinding.DataBindingUtil
